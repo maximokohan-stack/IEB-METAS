@@ -33,7 +33,7 @@ Object.assign(__ds_scope, { Card });
 
 // components/core/Icon.jsx
 try { (() => {
-const CDN = "https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/";
+const CDN = "icons/";
 function Icon({
   name,
   size = 20,

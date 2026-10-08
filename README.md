@@ -61,5 +61,5 @@ Mientras el prototipo esté instalado, la nueva versión puede verse recién en 
 ## Notas
 
 - Montos, fondos, tasas y composiciones son **ficticios**. Las proyecciones usan una estimación simple, no datos de IEB Research.
-- Las fuentes (Nunito) están incluidas en `src/fonts/` y los íconos (Lucide, ISC) en `src/icons/`.
+- Todo está incluido en el repo y nada se descarga de terceros: fuentes Nunito en `src/fonts/`, íconos Lucide (licencia ISC) en `src/icons/` y React 18.3.1 en `src/vendor/`.
 - `IEB+ Metas Prototipo.zip` es la versión anterior del prototipo, empaquetada; se deja como respaldo.

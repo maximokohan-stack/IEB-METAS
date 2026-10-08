@@ -1,5 +1,5 @@
 // Service worker de IEB+ Metas: guarda el prototipo en el dispositivo para que abra rápido y sin conexión.
-const CACHE = 'ieb-metas-v202610080202';
+const CACHE = 'ieb-metas-v202610080204';
 const ARCHIVOS = [
   "./src/fonts/nunito-italic-latin.woff2",
   "./src/fonts/nunito-latin.woff2",
@@ -74,6 +74,8 @@ const ARCHIVOS = [
   "./src/icons/wallet.svg",
   "./src/metas-v3.dc.html",
   "./src/support.js",
+  "./src/vendor/react-dom.production.min.js",
+  "./src/vendor/react.production.min.js",
   "./src/_ds/ieb-design-system-afd0370e-8960-496f-9ec9-2bcfce8e0f40/css/components.css",
   "./src/_ds/ieb-design-system-afd0370e-8960-496f-9ec9-2bcfce8e0f40/readme.md",
   "./src/_ds/ieb-design-system-afd0370e-8960-496f-9ec9-2bcfce8e0f40/styles.css",
