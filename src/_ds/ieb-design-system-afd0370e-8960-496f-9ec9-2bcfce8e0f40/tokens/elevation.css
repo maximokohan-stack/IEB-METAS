@@ -1,0 +1,20 @@
+:root,[data-theme="light"]{
+  --shadow-card:0 1px 2px rgba(17,17,17,0.04), 0 4px 14px rgba(46,0,95,0.06);
+  --shadow-raised:0 2px 4px rgba(17,17,17,0.05), 0 10px 24px rgba(46,0,95,0.10);
+  --shadow-brand:0 6px 18px rgba(91,0,214,0.24);
+  --shadow-nav:0 -1px 0 var(--border-subtle), 0 -8px 24px rgba(46,0,95,0.05);
+  --shadow-sheet:0 -12px 40px rgba(29,0,60,0.18);
+  --shadow-none:none;
+  --inset-pressed:inset 0 1px 2px rgba(29,0,60,0.14);
+}
+[data-theme="dark"]{
+  /* Cards don't lean on shadows here: the visible 1px border-default hairline plus the
+     bg-elevated/bg-canvas step carry elevation. Resting cards get no shadow at all;
+     shadows only appear as interaction feedback (hover/raised) or the CTA glow. */
+  --shadow-card:none;
+  --shadow-raised:0 4px 14px rgba(0,0,0,0.35);
+  --shadow-brand:0 6px 18px rgba(106,0,244,0.4);
+  --shadow-nav:0 -1px 0 var(--border-default);
+  --shadow-sheet:0 -12px 32px rgba(0,0,0,0.5);
+  --inset-pressed:inset 0 1px 2px rgba(0,0,0,0.4);
+}

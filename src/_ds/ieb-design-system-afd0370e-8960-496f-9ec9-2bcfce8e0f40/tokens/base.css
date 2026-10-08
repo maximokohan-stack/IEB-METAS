@@ -1,0 +1,9 @@
+/* Minimal element defaults so specimens, cards and kits share one baseline. */
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg-app);color:var(--text-primary);font-family:var(--font-body);font-size:var(--text-body);line-height:var(--leading-body);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+h1,h2,h3,h4{font-family:var(--font-display);color:var(--text-heading);font-weight:var(--weight-extrabold);letter-spacing:var(--tracking-tight);margin:0}
+p{margin:0}
+a{color:var(--text-brand);text-decoration:none;font-weight:var(--weight-bold)}
+a:hover{color:var(--brand-primary-hover);text-decoration:underline}
+button{font-family:inherit}
+.ieb-numeric{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}

@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>IEB+ Metas</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/ieb-design-system-afd0370e-8960-496f-9ec9-2bcfce8e0f40/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/ieb-design-system-afd0370e-8960-496f-9ec9-2bcfce8e0f40/tokens/colors.css">
+<link rel="stylesheet" href="_ds/ieb-design-system-afd0370e-8960-496f-9ec9-2bcfce8e0f40/tokens/typography.css">
+<link rel="stylesheet" href="_ds/ieb-design-system-afd0370e-8960-496f-9ec9-2bcfce8e0f40/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/ieb-design-system-afd0370e-8960-496f-9ec9-2bcfce8e0f40/tokens/radius.css">
+<link rel="stylesheet" href="_ds/ieb-design-system-afd0370e-8960-496f-9ec9-2bcfce8e0f40/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/ieb-design-system-afd0370e-8960-496f-9ec9-2bcfce8e0f40/tokens/motion.css">
+<link rel="stylesheet" href="_ds/ieb-design-system-afd0370e-8960-496f-9ec9-2bcfce8e0f40/tokens/base.css">
+<link rel="stylesheet" href="_ds/ieb-design-system-afd0370e-8960-496f-9ec9-2bcfce8e0f40/css/components.css">
+<link rel="stylesheet" href="_ds/ieb-design-system-afd0370e-8960-496f-9ec9-2bcfce8e0f40/styles.css">
+<script src="_ds/ieb-design-system-afd0370e-8960-496f-9ec9-2bcfce8e0f40/_ds_bundle.js"></script>
+<style>
+body{margin:0;background:#EDEBF2;font-family:"Nunito Sans","Nunito",system-ui,sans-serif}
+a{color:var(--action-primary);text-decoration:none}
+a:hover{color:var(--action-primary-hover)}
+button.ieb-card{font:inherit;color:inherit;width:100%;text-align:left;cursor:pointer;display:block}
+.mt-sm{margin-top:12px}
+</style>
+</helmet>
+
+<div style="min-height:100vh;display:flex;align-items:flex-start;justify-content:center;gap:28px;padding:28px 24px 40px;flex-wrap:wrap">
+
+<div style="position:relative;width:390px;height:844px;background:var(--bg-canvas);border-radius:40px;box-shadow:0 24px 70px rgba(29,0,60,0.24);overflow:hidden;display:flex;flex-direction:column;flex:none">
+
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 22px 2px;font-family:'Nunito',system-ui,sans-serif;font-size:13px;font-weight:800;color:var(--text-primary)"><span>9:41</span><span style="opacity:.85">▮▮▮</span></div>
+
+<x-import component-from-global-scope="IEBDesignSystem_afd037.TopBar" title="{{ barTitle }}" eyebrow="{{ barEyebrow }}" onBack="{{ barBack }}" hint-size="100%,56px"></x-import>
+
+<sc-if value="{{ isFlow }}" hint-placeholder-val="{{ false }}">
+<div style="padding:0 20px 14px"><x-import component-from-global-scope="IEBDesignSystem_afd037.Stepper" step="{{ flowStep }}" total="{{ cuatro }}" hint-size="100%,16px"></x-import></div>
+</sc-if>
+
+<div ref="{{ scrollRef }}" style="flex:1;overflow-y:auto;padding:0 20px 24px;display:flex;flex-direction:column;gap:16px">
+
+<sc-if value="{{ isEntrada }}" hint-placeholder-val="{{ true }}">
+<div data-screen-label="Entrada a Metas" style="display:flex;flex-direction:column;gap:18px">
+<p style="margin:-4px 0 0;font:400 15px/22px 'Nunito Sans',system-ui,sans-serif;color:var(--text-secondary);text-wrap:pretty">Empezá por lo que querés lograr. Te ayudamos a elegir cómo invertir para llegar.</p>
+
+<sc-if value="{{ tieneMetas }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:13px;font-weight:700;color:var(--text-primary)">Tus metas</span>
+<div class="ieb-card is-secondary" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+<div style="display:flex;flex-direction:column;gap:2px">
+<span class="ieb-help">Invertido en tus metas</span>
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:20px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--text-primary)">{{ totalInvertidoText }}</span>
+<span class="ieb-help">{{ totalMetasText }}</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:2px">
+<span class="ieb-help">Aporte programado por mes</span>
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:20px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--text-primary)">{{ totalAporteText }}</span>
+<span class="ieb-help">Todo en tu cuenta IEB+</span>
+</div>
+</div>
+<sc-for list="{{ metasResumen }}" as="m" hint-placeholder-count="1">
+<button type="button" class="ieb-card is-interactive" onClick="{{ m.abrir }}" style="display:flex;flex-direction:column;gap:12px">
+<span style="display:flex;align-items:center;gap:12px;width:100%">
+<span class="ieb-row-media"><x-import component-from-global-scope="IEBDesignSystem_afd037.Icon" name="{{ m.icon }}" size="{{ veinte }}" hint-size="20px,20px"></x-import></span>
+<span style="min-width:0;display:flex;flex-direction:column">
+<span class="ieb-row-title">{{ m.label }}</span>
+<span class="ieb-row-sub">{{ m.sub }}</span>
+</span>
+<span style="margin-left:auto"><x-import component-from-global-scope="IEBDesignSystem_afd037.Badge" tone="{{ m.tone }}" hint-size="52px,22px">{{ m.badge }}</x-import></span>
+</span>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.ProgressBar" value="{{ m.percent }}" tone="{{ m.barTone }}" hint-size="100%,10px"></x-import>
+<span style="display:flex;justify-content:space-between;width:100%"><span class="ieb-help">{{ m.montos }}</span><span class="ieb-help">{{ m.fecha }}</span></span>
+</button>
+</sc-for>
+</div>
+</sc-if>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:20px;font-weight:800;letter-spacing:-.02em;color:var(--text-heading)">¿Qué querés lograr?</span>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<sc-for list="{{ tipos }}" as="t" hint-placeholder-count="6">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.GoalCard" label="{{ t.label }}" icon="{{ t.icon }}" hint="{{ t.hint }}" onClick="{{ t.elegir }}" hint-size="100%,116px"></x-import>
+</sc-for>
+</div>
+<span class="ieb-help">Te sugerimos montos y plazos. Todo se puede cambiar.</span>
+</div>
+
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Note" icon="flask-conical" hint-size="100%,64px">Podés simular una meta y ver escenarios sin invertir plata. <a href="#" onClick="{{ irSimulacion }}">Probar el modo simulación</a></x-import>
+</div>
+</sc-if>
+
+<sc-if value="{{ isCrear }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="1 Conocer - tu meta" style="display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;align-items:center;gap:10px;margin-top:-4px">
+<span class="ieb-row-media"><x-import component-from-global-scope="IEBDesignSystem_afd037.Icon" name="{{ draftIcon }}" size="{{ veinte }}" hint-size="20px,20px"></x-import></span>
+<div style="min-width:0"><p class="ieb-row-title">{{ draftLabel }}</p><p class="ieb-row-sub">Armamos una propuesta. Cambiá lo que quieras.</p></div>
+</div>
+
+<div class="ieb-card" style="padding:var(--space-2) var(--card-padding)">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.ListRow" icon="target" title="Cuánto necesitás" subtitle="Sugerido según tu meta" value="{{ montoText }}" onClick="{{ abrirMonto }}" hint-size="100%,64px"></x-import>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.ListRow" icon="calendar" title="Para cuándo" subtitle="{{ plazoSub }}" value="{{ fechaText }}" onClick="{{ abrirFecha }}" hint-size="100%,64px"></x-import>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.ListRow" icon="wallet" title="Cuánto invertís hoy" subtitle="Sale de tu saldo disponible" value="{{ inicialText }}" onClick="{{ abrirInicial }}" hint-size="100%,64px"></x-import>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.ListRow" icon="hand-coins" title="Cuánto podés aportar" subtitle="Por mes, aproximado" value="{{ aporteText }}" onClick="{{ abrirAporte }}" hint-size="100%,64px"></x-import>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.ListRow" icon="unlock" title="Disponibilidad" subtitle="Si podrías necesitar la plata antes" value="{{ liquidezCorto }}" onClick="{{ abrirLiquidez }}" hint-size="100%,64px"></x-import>
+</div>
+
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Note" icon="calculator" hint-size="100%,64px">{{ consecuenciaAporte }}</x-import>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Note" tone="neutral" icon="{{ liquidezIcon }}" hint-size="100%,64px">{{ consecuenciaLiquidez }}</x-import>
+
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Button" variant="ghost" size="md" icon="flask-conical" onClick="{{ irSimulacion }}" hint-size="100%,44px">Ver escenarios sin invertir</x-import>
+</div>
+</sc-if>
+
+<sc-if value="{{ isPerfil }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="2 Entender - tu perfil" style="display:flex;flex-direction:column;gap:16px">
+<p style="margin:-4px 0 0;font:400 15px/22px 'Nunito Sans',system-ui,sans-serif;color:var(--text-secondary);text-wrap:pretty">Tres preguntas para entender desde dónde arrancás y cuánto movimiento te resulta tolerable.</p>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:13px;font-weight:700;color:var(--text-primary)">¿Invertiste alguna vez?</span>
+<sc-for list="{{ experienciaOpts }}" as="x" hint-placeholder-count="3">
+<button type="button" class="{{ x.cls }}" onClick="{{ x.elegir }}" style="padding:14px var(--card-padding)">
+<span class="ieb-row-title">{{ x.label }}</span>
+</button>
+</sc-for>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:13px;font-weight:700;color:var(--text-primary)">Si en un mes tu meta baja 10%, ¿qué harías?</span>
+<sc-for list="{{ reaccionOpts }}" as="r" hint-placeholder-count="3">
+<button type="button" class="{{ r.cls }}" onClick="{{ r.elegir }}" style="padding:14px var(--card-padding)">
+<span class="ieb-row-title">{{ r.label }}</span>
+</button>
+</sc-for>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:13px;font-weight:700;color:var(--text-primary)">¿Cuánto riesgo te sentís cómodo asumiendo?</span>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.RiskSelector" value="{{ riesgoElegido }}" onChange="{{ setRiesgo }}" hint-size="100%,240px"></x-import>
+</div>
+
+<sc-if value="{{ perfilListo }}" hint-placeholder-val="{{ false }}">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Note" tone="positive" icon="shield-check" hint-size="100%,64px">{{ perfilResultado }}</x-import>
+</sc-if>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Note" tone="neutral" icon="graduation-cap" hint-size="100%,60px">Riesgo es cuánto puede moverse el valor en el camino. Un mes en rojo no es una pérdida si no vendés.</x-import>
+</div>
+</sc-if>
+
+<sc-if value="{{ isPlan }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="3 Elegir - tu plan" style="display:flex;flex-direction:column;gap:14px">
+<div class="ieb-card is-soft" style="display:flex;flex-direction:column;gap:12px">
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--text-brand)">Tu objetivo</span>
+<p style="margin:0;font-family:'Nunito',system-ui,sans-serif;font-size:18px;line-height:24px;font-weight:800;letter-spacing:-.01em;color:var(--text-heading);text-wrap:pretty">{{ objetivoFrase }}</p>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
+<sc-for list="{{ objetivoDatos }}" as="o" hint-placeholder-count="3">
+<div style="display:flex;flex-direction:column;gap:2px;min-width:0">
+<span class="ieb-help">{{ o.label }}</span>
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:15px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--text-primary)">{{ o.valor }}</span>
+</div>
+</sc-for>
+</div>
+<sc-if value="{{ hayBrecha }}" hint-placeholder-val="{{ false }}">
+<div style="height:1px;background:var(--border-subtle)"></div>
+<p style="margin:0;font:400 14px/21px 'Nunito Sans',system-ui,sans-serif;color:var(--text-secondary);text-wrap:pretty">{{ brechaTexto }}</p>
+</sc-if>
+</div>
+
+<sc-if value="{{ esPrimeraVez }}" hint-placeholder-val="{{ false }}">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Note" icon="graduation-cap" hint-size="100%,64px">Como es tu primera vez, priorizamos opciones del plan Rookie, que no tiene costo.</x-import>
+</sc-if>
+
+<div style="display:flex;flex-direction:column;gap:4px;margin-top:4px">
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:18px;font-weight:800;letter-spacing:-.02em;color:var(--text-heading)">Elegí cómo invertir</span>
+<span style="font:400 14px/21px 'Nunito Sans',system-ui,sans-serif;color:var(--text-secondary);text-wrap:pretty">Armamos tres opciones según el nivel de riesgo. Te sugerimos una, pero decidís vos.</span>
+</div>
+
+<x-import component-from-global-scope="IEBDesignSystem_afd037.RecommendationCard" instrument="{{ recNombre }}" riskLabel="{{ recRiesgo }}" reason="{{ recReason }}" stats="{{ recStats }}" primaryLabel="Elegir esta opción" onPrimary="{{ elegirRec }}" onWhy="{{ abrirPorque }}" hint-size="100%,280px"></x-import>
+
+<sc-for list="{{ alternativas }}" as="a" hint-placeholder-count="2">
+<button type="button" class="ieb-card is-interactive" onClick="{{ a.elegir }}" style="display:flex;flex-direction:column;gap:8px">
+<span style="display:flex;align-items:center;gap:10px;width:100%">
+<span class="ieb-row-title">{{ a.nombre }}</span>
+<span style="margin-left:auto"><x-import component-from-global-scope="IEBDesignSystem_afd037.Badge" tone="{{ a.tone }}" hint-size="80px,22px">{{ a.riesgo }}</x-import></span>
+</span>
+<span style="font:400 14px/21px 'Nunito Sans',system-ui,sans-serif;color:var(--text-secondary);text-wrap:pretty">{{ a.reason }}</span>
+<span style="display:flex;align-items:center;gap:8px;width:100%">
+<span class="ieb-help">{{ a.resumen }}</span>
+<span style="margin-left:auto;display:flex;align-items:center;gap:2px;font-family:'Nunito',system-ui,sans-serif;font-size:13px;font-weight:800;color:var(--action-primary)">Elegir<x-import component-from-global-scope="IEBDesignSystem_afd037.Icon" name="chevron-right" size="{{ dieciseis }}" hint-size="16px,16px"></x-import></span>
+</span>
+</button>
+</sc-for>
+
+<div class="ieb-card" style="display:flex;flex-direction:column;padding:14px var(--card-padding) 6px">
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:14px;font-weight:800;color:var(--text-primary);padding-bottom:10px">Comparalas</span>
+<div style="display:grid;grid-template-columns:82px repeat(3,minmax(0,1fr));gap:6px;padding-bottom:8px">
+<span></span>
+<sc-for list="{{ compHeader }}" as="h" hint-placeholder-count="3">
+<span style="display:flex;flex-direction:column;gap:1px;min-width:0">
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:12px;font-weight:800;color:var(--text-primary)">{{ h.label }}</span>
+<sc-if value="{{ h.sugerida }}" hint-placeholder-val="{{ false }}"><span style="font-family:'Nunito',system-ui,sans-serif;font-size:11px;font-weight:800;color:var(--text-brand)">Sugerida</span></sc-if>
+</span>
+</sc-for>
+</div>
+<sc-for list="{{ comparacion }}" as="f" hint-placeholder-count="4">
+<div style="display:grid;grid-template-columns:82px repeat(3,minmax(0,1fr));gap:6px;padding:9px 0;border-top:1px solid var(--border-subtle);align-items:baseline">
+<span class="ieb-help">{{ f.label }}</span>
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:13px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--text-primary)">{{ f.a }}</span>
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:13px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--text-primary)">{{ f.b }}</span>
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:13px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--text-primary)">{{ f.c }}</span>
+</div>
+</sc-for>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:8px">
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:13px;font-weight:700;color:var(--text-primary)">¿Qué es…?</span>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ terminosPlan }}" as="tp" hint-placeholder-count="4">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Tag" onClick="{{ tp.abrir }}" hint-size="88px,34px">{{ tp.label }}</x-import>
+</sc-for>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:13px;font-weight:700;color:var(--text-primary)">La opción sugerida en detalle</span>
+<div class="ieb-card" style="padding:var(--space-2) var(--card-padding)">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.ListRow" icon="chart-pie" title="Composición" subtitle="En qué está invertido" onClick="{{ abrirComposicion }}" hint-size="100%,60px"></x-import>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.ListRow" icon="receipt" title="Costos" subtitle="{{ costoResumen }}" onClick="{{ abrirCostos }}" hint-size="100%,60px"></x-import>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.ListRow" icon="activity" title="Riesgo" subtitle="Qué puede pasar en el corto plazo" onClick="{{ abrirRiesgo }}" hint-size="100%,60px"></x-import>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.ListRow" icon="git-branch" title="Escenarios" subtitle="Favorable, esperado y adverso" onClick="{{ irSimulacion }}" hint-size="100%,60px"></x-import>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.ListRow" icon="book-open" title="Explicación de IEB Research" subtitle="El informe detrás de la sugerencia" onClick="{{ abrirResearch }}" hint-size="100%,60px"></x-import>
+</div>
+</div>
+
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Note" tone="neutral" icon="triangle-alert" hint-size="100%,60px">Los montos son estimaciones armadas con datos de IEB Research, no una promesa de resultado.</x-import>
+</div>
+</sc-if>
+
+<sc-if value="{{ isInvertir }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="4 Invertir" style="display:flex;flex-direction:column;gap:14px">
+<div class="ieb-card" style="padding:var(--space-2) var(--card-padding)">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.ListRow" icon="{{ draftIcon }}" title="{{ draftLabel }}" subtitle="{{ resumenObjetivo }}" chevron="{{ falso }}" hint-size="100%,60px"></x-import>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.ListRow" icon="chart-pie" title="{{ opNombre }}" subtitle="{{ opRiesgo }}" onClick="{{ volverPlan }}" hint-size="100%,60px"></x-import>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.ListRow" icon="layers" title="{{ planTitulo }}" subtitle="{{ planIncluye }}" value="{{ planPrecio }}" chevron="{{ falso }}" hint-size="100%,60px"></x-import>
+</div>
+<sc-if value="{{ necesitaInvestor }}" hint-placeholder-val="{{ false }}">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Note" tone="neutral" icon="info" hint-size="100%,80px">Esta opción usa CEDEARs y acciones, que están en el plan Investor. Cuesta $5.000 + IVA y solo se cobra los meses que operás.</x-import>
+</sc-if>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:13px;font-weight:700;color:var(--text-primary)">Cómo vas a aportar</span>
+<sc-for list="{{ modos }}" as="mo" hint-placeholder-count="3">
+<button type="button" class="{{ mo.cls }}" onClick="{{ mo.elegir }}" style="display:flex;align-items:flex-start;gap:12px;padding:14px var(--card-padding)">
+<span style="display:flex;margin-top:2px;color:var(--action-primary)"><x-import component-from-global-scope="IEBDesignSystem_afd037.Icon" name="{{ mo.icon }}" size="{{ veinte }}" hint-size="20px,20px"></x-import></span>
+<span style="min-width:0;display:flex;flex-direction:column"><span class="ieb-row-title">{{ mo.label }}</span><span class="ieb-row-sub">{{ mo.desc }}</span></span>
+</button>
+</sc-for>
+<sc-if value="{{ esMensual }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:13px;font-weight:700;color:var(--text-primary)">Qué día del mes</span>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<sc-for list="{{ dias }}" as="di" hint-placeholder-count="4">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Tag" selected="{{ di.sel }}" onClick="{{ di.elegir }}" hint-size="72px,34px">{{ di.label }}</x-import>
+</sc-for>
+</div>
+</div>
+</sc-if>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Note" icon="calendar-check" hint-size="100%,64px">{{ programadoTexto }}</x-import>
+</div>
+
+<div class="ieb-card" style="padding:var(--space-2) var(--card-padding)">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.ListRow" icon="wallet" title="Inversión de hoy" subtitle="{{ inicialSub }}" value="{{ inicialText }}" onClick="{{ abrirInicial }}" hint-size="100%,60px"></x-import>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.ListRow" icon="receipt" title="Costos" subtitle="{{ costoResumen }}" onClick="{{ abrirCostos }}" hint-size="100%,60px"></x-import>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.ListRow" icon="unlock" title="Rescate" subtitle="{{ rescateResumen }}" onClick="{{ abrirLiquidez2 }}" hint-size="100%,60px"></x-import>
+</div>
+<sc-if value="{{ saldoExcedido }}" hint-placeholder-val="{{ false }}">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Note" tone="warm" icon="wallet" hint-size="100%,64px">{{ inicialNota }}</x-import>
+</sc-if>
+<div style="display:flex;flex-direction:column;gap:8px">
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:13px;font-weight:700;color:var(--text-primary)">¿Qué es…?</span>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ terminosInvertir }}" as="ti" hint-placeholder-count="3">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Tag" onClick="{{ ti.abrir }}" hint-size="88px,34px">{{ ti.label }}</x-import>
+</sc-for>
+</div>
+</div>
+<div class="ieb-card is-secondary">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Checkbox" label="Entendí el riesgo y los costos" checked="{{ consent }}" onChange="{{ toggleConsent }}" help="Te mostramos estimaciones, no promesas de resultado." hint-size="100%,60px"></x-import>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isSimulacion }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Simulacion" style="display:flex;flex-direction:column;gap:14px">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Note" tone="warm" icon="flask-conical" hint-size="100%,64px">Estás en modo simulación. No se envía ninguna orden y no se mueve plata de tu cuenta.</x-import>
+
+<div style="display:flex;flex-direction:column;gap:8px">
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:13px;font-weight:700;color:var(--text-primary)">Cuánto podrías aportar</span>
+<div style="display:flex;gap:8px">
+<sc-for list="{{ nivelesAporte }}" as="n" hint-placeholder-count="3">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Tag" selected="{{ n.sel }}" onClick="{{ n.elegir }}" hint-size="98px,34px">{{ n.label }}</x-import>
+</sc-for>
+</div>
+</div>
+
+<div class="ieb-card is-secondary" style="display:flex;flex-direction:column;gap:6px">
+<span class="ieb-help">Invirtiendo {{ inicialText }} hoy y {{ simAporteText }} por mes en {{ recNombre }}</span>
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:24px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--text-heading)">{{ simEsperado }}</span>
+<span class="ieb-help">Estimado para {{ fechaText }}, sobre un objetivo de {{ montoText }}</span>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:13px;font-weight:700;color:var(--text-primary)">Tres escenarios posibles</span>
+<sc-for list="{{ escenarios }}" as="e" hint-placeholder-count="3">
+<div class="ieb-card" style="display:flex;align-items:center;gap:12px">
+<span style="display:flex;color:var(--action-primary)"><x-import component-from-global-scope="IEBDesignSystem_afd037.Icon" name="{{ e.icon }}" size="{{ veinte }}" hint-size="20px,20px"></x-import></span>
+<div style="min-width:0"><p class="ieb-row-title">{{ e.label }}</p><p class="ieb-row-sub">{{ e.desc }}</p></div>
+<span style="margin-left:auto;font-family:'Nunito',system-ui,sans-serif;font-size:16px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--text-primary)">{{ e.monto }}</span>
+</div>
+</sc-for>
+</div>
+
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Note" icon="graduation-cap" hint-size="100%,80px">Los tres escenarios usan el mismo aporte. La diferencia es cómo se comporta el mercado. Ninguno está garantizado.</x-import>
+</div>
+</sc-if>
+
+<sc-if value="{{ isListo }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Meta creada" style="display:flex;flex-direction:column;gap:14px;align-items:center;padding-top:28px">
+<span style="width:64px;height:64px;border-radius:999px;background:var(--surface-selected);display:flex;align-items:center;justify-content:center;color:var(--action-primary)"><x-import component-from-global-scope="IEBDesignSystem_afd037.Icon" name="check" size="{{ veintiocho }}" hint-size="28px,28px"></x-import></span>
+<p style="margin:0;font-family:'Nunito',system-ui,sans-serif;font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--text-heading);text-align:center">Tu meta quedó en marcha</p>
+<p style="margin:0;font:400 15px/22px 'Nunito Sans',system-ui,sans-serif;color:var(--text-secondary);text-align:center;text-wrap:pretty">{{ textoListo }}</p>
+<div class="ieb-card" style="width:100%;box-sizing:border-box;padding:var(--space-2) var(--card-padding);margin-top:8px">
+<span style="display:block;padding:10px 0 2px;font-family:'Nunito',system-ui,sans-serif;font-size:13px;font-weight:700;color:var(--text-primary)">Te vamos a avisar</span>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.ListRow" icon="bell" title="Antes de cada aporte" subtitle="Un día antes, por si querés saltearlo" chevron="{{ falso }}" hint-size="100%,60px"></x-import>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.ListRow" icon="compass" title="Cuando revisemos tu estrategia" subtitle="Te contamos qué cambió y si conviene hacer algo" chevron="{{ falso }}" hint-size="100%,60px"></x-import>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.ListRow" icon="triangle-alert" title="Si te desviás del plan" subtitle="Con opciones para acomodarlo" chevron="{{ falso }}" hint-size="100%,60px"></x-import>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isDetalle }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="5 Seguir - detalle de meta" style="display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;align-items:center;gap:10px;margin-top:-4px">
+<span class="ieb-row-media"><x-import component-from-global-scope="IEBDesignSystem_afd037.Icon" name="{{ metaIcon }}" size="{{ veinte }}" hint-size="20px,20px"></x-import></span>
+<span class="ieb-help">{{ metaResumenLinea }}</span>
+<span style="margin-left:auto"><x-import component-from-global-scope="IEBDesignSystem_afd037.Badge" tone="{{ metaTone }}" hint-size="80px,22px">{{ metaEstado }}</x-import></span>
+</div>
+
+<div class="ieb-card">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.GoalProgress" percent="{{ metaPercent }}" saved="{{ metaAhorradoText }}" missing="{{ metaFaltaText }}" targetDate="{{ metaFechaEstimada }}" monthly="{{ metaAporteText }}" hint-size="100%,150px"></x-import>
+</div>
+
+<div class="ieb-card" style="display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px">
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--text-brand)">Evolución</span>
+<span class="ieb-help">Objetivo {{ evoObjetivoText }}</span>
+</div>
+<div style="height:96px;display:flex;align-items:flex-end;gap:6px;border-top:1px dashed var(--border-strong);border-bottom:1px solid var(--border-subtle)">
+<sc-for list="{{ evoBars }}" as="b" hint-placeholder-count="8">
+<div style="flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end">
+<div style="height:{{ b.h }};min-height:3px;background:{{ b.color }};border-radius:4px 4px 0 0"></div>
+</div>
+</sc-for>
+</div>
+<div style="display:flex;justify-content:space-between;gap:8px">
+<span class="ieb-help">{{ evoDesde }}</span>
+<span class="ieb-help">{{ evoHasta }}</span>
+</div>
+<div style="display:flex;gap:14px;flex-wrap:wrap">
+<span class="ieb-help" style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:3px;background:var(--brand-primary)"></span>Hasta hoy</span>
+<span class="ieb-help" style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:3px;background:var(--border-brand-soft)"></span>Proyectado, no garantizado</span>
+</div>
+</div>
+
+<div class="ieb-card is-secondary" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+<div style="display:flex;flex-direction:column;gap:2px">
+<span class="ieb-help">Aportaste</span>
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:20px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--text-primary)">{{ metaAportadoText }}</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:2px">
+<span class="ieb-help">Rendimiento</span>
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:20px;font-weight:800;font-variant-numeric:tabular-nums;color:{{ rendColor }}">{{ metaRendText }}</span>
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:12px;font-weight:700;font-variant-numeric:tabular-nums;color:{{ rendColor }}">{{ metaRendPct }}</span>
+</div>
+</div>
+
+<sc-if value="{{ fueraDeRitmo }}" hint-placeholder-val="{{ false }}">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Note" tone="warm" icon="triangle-alert" hint-size="100%,80px">{{ desvioNota }}</x-import>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Button" block="{{ verdadero }}" size="md" icon="sliders-horizontal" onClick="{{ irAjustar }}" hint-size="100%,44px">Ver cómo acomodarla</x-import>
+</sc-if>
+
+<div style="display:flex;flex-direction:column;gap:8px">
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:13px;font-weight:700;color:var(--text-primary)">¿Qué es…?</span>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ terminosDetalle }}" as="td" hint-placeholder-count="3">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Tag" onClick="{{ td.abrir }}" hint-size="88px,34px">{{ td.label }}</x-import>
+</sc-for>
+</div>
+</div>
+
+<div class="ieb-card is-soft" style="display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;align-items:baseline;gap:8px">
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--text-brand)">Tu estrategia hoy</span>
+<span class="ieb-help" style="margin-left:auto">{{ revisionFecha }}</span>
+</div>
+<sc-for list="{{ estrategiaBloques }}" as="b" hint-placeholder-count="5">
+<div style="display:flex;gap:10px">
+<span style="display:flex;margin-top:3px;flex:none;color:var(--action-primary)"><x-import component-from-global-scope="IEBDesignSystem_afd037.Icon" name="{{ b.icon }}" size="{{ dieciocho }}" hint-size="18px,18px"></x-import></span>
+<div style="min-width:0;display:flex;flex-direction:column;gap:2px">
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:13px;font-weight:700;color:var(--text-primary)">{{ b.titulo }}</span>
+<span style="font:400 14px/21px 'Nunito Sans',system-ui,sans-serif;color:var(--text-secondary);text-wrap:pretty">{{ b.texto }}</span>
+</div>
+</div>
+</sc-for>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:13px;font-weight:700;color:var(--text-primary)">Avisos</span>
+<div class="ieb-card" style="padding:var(--space-2) var(--card-padding)">
+<sc-for list="{{ avisos }}" as="av" hint-placeholder-count="3">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.ListRow" icon="{{ av.icon }}" title="{{ av.titulo }}" subtitle="{{ av.sub }}" onClick="{{ av.abrir }}" hint-size="100%,60px"></x-import>
+</sc-for>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:13px;font-weight:700;color:var(--text-primary)">Tu plan</span>
+<div class="ieb-card" style="padding:var(--space-2) var(--card-padding)">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.ListRow" icon="hand-coins" title="Cómo aportás" subtitle="{{ metaModoLabel }}" value="{{ metaAporteText }}" onClick="{{ abrirModo }}" hint-size="100%,60px"></x-import>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.ListRow" icon="chart-pie" title="Dónde está invertido" subtitle="{{ metaInstrumento }}" onClick="{{ abrirComposicion }}" hint-size="100%,60px"></x-import>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.ListRow" icon="layers" title="{{ metaPlanTitulo }}" subtitle="{{ metaPlanPrecio }}" chevron="{{ falso }}" hint-size="100%,60px"></x-import>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.ListRow" icon="receipt" title="Movimientos" subtitle="{{ movResumen }}" onClick="{{ abrirMovimientos }}" hint-size="100%,60px"></x-import>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:13px;font-weight:700;color:var(--text-primary)">Aprendé con IEB+</span>
+<div class="ieb-card" style="padding:var(--space-2) var(--card-padding)">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.ListRow" icon="radio" title="IEB+ LIVE" subtitle="Jueves 19 h · Fondos comunes para empezar" onClick="{{ abrirLive }}" hint-size="100%,60px"></x-import>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.ListRow" icon="users" title="House IEB+" subtitle="Encuentros para aprender a invertir" onClick="{{ abrirHouse }}" hint-size="100%,60px"></x-import>
+</div>
+</div>
+
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Button" variant="ghost" size="md" icon="pause" onClick="{{ saltearMes }}" hint-size="100%,44px">Saltear el aporte de este mes</x-import>
+</div>
+</sc-if>
+
+<sc-if value="{{ isAjustar }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Adaptar el plan" style="display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:13px;font-weight:700;color:var(--text-primary)">¿Qué cambió?</span>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<sc-for list="{{ motivos }}" as="mt" hint-placeholder-count="3">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Tag" selected="{{ mt.sel }}" onClick="{{ mt.elegir }}" hint-size="120px,34px">{{ mt.label }}</x-import>
+</sc-for>
+</div>
+</div>
+<p style="margin:0;font:400 15px/22px 'Nunito Sans',system-ui,sans-serif;color:var(--text-secondary);text-wrap:pretty">{{ motivoTexto }}</p>
+<sc-for list="{{ ajustes }}" as="a" hint-placeholder-count="3">
+<button type="button" class="{{ a.cls }}" onClick="{{ a.elegir }}" style="display:flex;flex-direction:column;gap:8px">
+<span style="display:flex;align-items:center;gap:10px;width:100%">
+<span style="display:flex;color:var(--action-primary)"><x-import component-from-global-scope="IEBDesignSystem_afd037.Icon" name="{{ a.icon }}" size="{{ veinte }}" hint-size="20px,20px"></x-import></span>
+<span class="ieb-row-title">{{ a.label }}</span>
+<span style="margin-left:auto;font-family:'Nunito',system-ui,sans-serif;font-size:14px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--text-heading)">{{ a.valor }}</span>
+</span>
+<span style="font:400 14px/21px 'Nunito Sans',system-ui,sans-serif;color:var(--text-secondary);text-wrap:pretty">{{ a.efecto }}</span>
+</button>
+</sc-for>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Note" tone="neutral" icon="info" hint-size="100%,60px">La inversión no cambia. Solo cambia el plan de aportes, y lo podés volver a cambiar.</x-import>
+</div>
+</sc-if>
+
+</div>
+
+<sc-if value="{{ hayCta }}" hint-placeholder-val="{{ false }}">
+<div style="padding:12px 20px 20px;display:flex;gap:10px;background:var(--bg-canvas);box-shadow:0 -8px 20px rgba(46,0,95,0.05)">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Button" block="{{ verdadero }}" iconAfter="{{ ctaIcon }}" disabled="{{ ctaDisabled }}" onClick="{{ ctaAction }}" hint-size="100%,52px">{{ ctaLabel }}</x-import>
+<sc-if value="{{ haySecundario }}" hint-placeholder-val="{{ false }}">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Button" variant="secondary" size="lg" onClick="{{ secAction }}" hint-size="auto,52px">{{ secLabel }}</x-import>
+</sc-if>
+</div>
+</sc-if>
+
+<x-import component-from-global-scope="IEBDesignSystem_afd037.BottomNav" active="metas" onSelect="{{ noop }}" hint-size="100%,64px"></x-import>
+
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Sheet" open="{{ sheetMonto }}" title="Cuánto necesitás" onClose="{{ cerrarSheet }}" footer="{{ footerListo }}" hint-size="100%,340px">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.AmountInput" label="Objetivo" value="{{ montoRaw }}" presets="{{ montoPresets }}" onChange="{{ setMonto }}" onPreset="{{ setMontoPreset }}" help="Es una referencia. La podés mover cuando quieras." hint-size="100%,180px"></x-import>
+<div class="mt-sm"><x-import component-from-global-scope="IEBDesignSystem_afd037.Note" icon="calculator" hint-size="100%,60px">{{ consecuenciaAporte }}</x-import></div>
+</x-import>
+
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Sheet" open="{{ sheetFecha }}" title="Para cuándo" onClose="{{ cerrarSheet }}" footer="{{ footerListo }}" hint-size="100%,260px">
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<sc-for list="{{ plazos }}" as="p" hint-placeholder-count="6">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Tag" selected="{{ p.sel }}" onClick="{{ p.elegir }}" hint-size="96px,34px">{{ p.label }}</x-import>
+</sc-for>
+</div>
+<div class="mt-sm"><x-import component-from-global-scope="IEBDesignSystem_afd037.Note" icon="calendar" hint-size="100%,60px">{{ consecuenciaAporte }}</x-import></div>
+</x-import>
+
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Sheet" open="{{ sheetInicial }}" title="Cuánto invertís hoy" onClose="{{ cerrarSheet }}" footer="{{ footerListo }}" hint-size="100%,400px">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.AmountInput" label="Inversión inicial" value="{{ inicialRaw }}" presets="{{ inicialPresets }}" onChange="{{ setInicial }}" onPreset="{{ setInicialPreset }}" help="Puede ser $0 y arrancar con el aporte mensual." hint-size="100%,180px"></x-import>
+<div class="mt-sm"><x-import component-from-global-scope="IEBDesignSystem_afd037.Note" tone="{{ inicialTone }}" icon="wallet" hint-size="100%,60px">{{ inicialNota }}</x-import></div>
+<div class="mt-sm"><x-import component-from-global-scope="IEBDesignSystem_afd037.Note" icon="calculator" hint-size="100%,60px">{{ consecuenciaAporte }}</x-import></div>
+</x-import>
+
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Sheet" open="{{ sheetAporte }}" title="Cuánto podés aportar" onClose="{{ cerrarSheet }}" footer="{{ footerListo }}" hint-size="100%,340px">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.AmountInput" label="Aporte por mes" value="{{ aporteRaw }}" onChange="{{ setAporte }}" help="Poné lo que te resulte cómodo. Si un mes no podés, lo salteás." hint-size="100%,140px"></x-import>
+<div class="mt-sm"><x-import component-from-global-scope="IEBDesignSystem_afd037.Note" icon="calculator" hint-size="100%,60px">{{ consecuenciaAporte }}</x-import></div>
+</x-import>
+
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Sheet" open="{{ sheetLiquidez }}" title="¿Podrías necesitar esta plata antes?" onClose="{{ cerrarSheet }}" footer="{{ footerListo }}" hint-size="100%,340px">
+<div style="display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ liquidezOpts }}" as="l" hint-placeholder-count="3">
+<button type="button" class="{{ l.cls }}" onClick="{{ l.elegir }}" style="padding:14px var(--card-padding)">
+<span class="ieb-row-title">{{ l.label }}</span>
+<span class="ieb-row-sub">{{ l.desc }}</span>
+</button>
+</sc-for>
+</div>
+<div class="mt-sm"><x-import component-from-global-scope="IEBDesignSystem_afd037.Note" tone="neutral" icon="unlock" hint-size="100%,60px">{{ consecuenciaLiquidez }}</x-import></div>
+</x-import>
+
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Sheet" open="{{ sheetPorque }}" title="Por qué te sugerimos esto" onClose="{{ cerrarSheet }}" footer="{{ footerEntendido }}" hint-size="100%,380px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<sc-for list="{{ razones }}" as="rz" hint-placeholder-count="4">
+<div style="display:flex;gap:10px">
+<span style="display:flex;margin-top:3px;flex:none;color:var(--action-primary)"><x-import component-from-global-scope="IEBDesignSystem_afd037.Icon" name="{{ rz.icon }}" size="{{ dieciocho }}" hint-size="18px,18px"></x-import></span>
+<div style="min-width:0;display:flex;flex-direction:column;gap:2px">
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:13px;font-weight:700;color:var(--text-primary)">{{ rz.titulo }}</span>
+<span style="font:400 14px/21px 'Nunito Sans',system-ui,sans-serif;color:var(--text-secondary);text-wrap:pretty">{{ rz.texto }}</span>
+</div>
+</div>
+</sc-for>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Note" tone="neutral" icon="scale" hint-size="100%,80px">Es una sugerencia, no una decisión. Podés elegir cualquiera de las tres y cambiar cuando quieras, sin costo.</x-import>
+</div>
+</x-import>
+
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Sheet" open="{{ sheetComposicion }}" title="{{ vistaNombre }}" onClose="{{ cerrarSheet }}" footer="{{ footerEntendido }}" hint-size="100%,340px">
+<sc-for list="{{ composicion }}" as="c" hint-placeholder-count="3">
+<div style="display:flex;flex-direction:column;gap:6px;padding:10px 0;border-bottom:1px solid var(--border-subtle)">
+<div style="display:flex;align-items:baseline;gap:8px">
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:14px;font-weight:700;color:var(--text-primary)">{{ c.label }}</span>
+<span style="margin-left:auto;font-family:'Nunito',system-ui,sans-serif;font-size:14px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--text-heading)">{{ c.peso }}</span>
+</div>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.ProgressBar" value="{{ c.valor }}" hint-size="100%,10px"></x-import>
+<span class="ieb-help">{{ c.desc }}</span>
+</div>
+</sc-for>
+</x-import>
+
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Sheet" open="{{ sheetCostos }}" title="Costos" onClose="{{ cerrarSheet }}" footer="{{ footerEntendido }}" hint-size="100%,320px">
+<sc-for list="{{ costos }}" as="c" hint-placeholder-count="3">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.ListRow" title="{{ c.label }}" subtitle="{{ c.desc }}" value="{{ c.valor }}" chevron="{{ falso }}" hint-size="100%,60px"></x-import>
+</sc-for>
+<div class="mt-sm"><x-import component-from-global-scope="IEBDesignSystem_afd037.Note" tone="neutral" icon="receipt" hint-size="100%,60px">Los costos ya están descontados en los números que te mostramos. No hay costo por salir antes.</x-import></div>
+</x-import>
+
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Sheet" open="{{ sheetRiesgo }}" title="Riesgo" onClose="{{ cerrarSheet }}" footer="{{ footerEntendido }}" hint-size="100%,340px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="margin:0;font:400 15px/22px 'Nunito Sans',system-ui,sans-serif;color:var(--text-primary);text-wrap:pretty">{{ riesgoTexto }}</p>
+<div class="ieb-card is-secondary" style="display:flex;flex-direction:column;gap:4px">
+<span class="ieb-help">Peor mes de los últimos tres años</span>
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:24px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--status-negative)">{{ peorMes }}</span>
+<span class="ieb-help">Se recuperó en {{ recuperacion }}</span>
+</div>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Note" icon="graduation-cap" hint-size="100%,80px">Volatilidad quiere decir cuánto se mueve el valor mes a mes. Más movimiento no es una pérdida: es pérdida solo si vendés en el peor momento.</x-import>
+</div>
+</x-import>
+
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Sheet" open="{{ sheetLiq2 }}" title="Rescate" onClose="{{ cerrarSheet }}" footer="{{ footerEntendido }}" hint-size="100%,300px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="margin:0;font:400 15px/22px 'Nunito Sans',system-ui,sans-serif;color:var(--text-primary);text-wrap:pretty">{{ textoRescate }}</p>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Note" tone="neutral" icon="unlock" hint-size="100%,80px">Podés rescatar una parte y dejar el resto invertido. La meta se recalcula sola con lo que queda.</x-import>
+</div>
+</x-import>
+
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Sheet" open="{{ sheetResearch }}" title="IEB Research" onClose="{{ cerrarSheet }}" footer="{{ footerEntendido }}" hint-size="100%,380px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<span class="ieb-help">{{ researchMeta }}</span>
+<p style="margin:0;font-family:'Nunito',system-ui,sans-serif;font-size:16px;font-weight:800;letter-spacing:-.01em;color:var(--text-heading);text-wrap:pretty">{{ researchTitulo }}</p>
+<p style="margin:0;font:400 15px/22px 'Nunito Sans',system-ui,sans-serif;color:var(--text-primary);text-wrap:pretty">{{ researchSimple }}</p>
+<div style="height:1px;background:var(--border-subtle)"></div>
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:13px;font-weight:700;color:var(--text-primary)">En términos técnicos</span>
+<p style="margin:0;font:400 14px/21px 'Nunito Sans',system-ui,sans-serif;color:var(--text-secondary);text-wrap:pretty">{{ researchTecnico }}</p>
+</div>
+</x-import>
+
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Sheet" open="{{ sheetAprender }}" title="{{ terminoTitulo }}" onClose="{{ cerrarSheet }}" footer="{{ footerEntendido }}" hint-size="100%,280px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="margin:0;font:400 15px/22px 'Nunito Sans',system-ui,sans-serif;color:var(--text-primary);text-wrap:pretty">{{ terminoTexto }}</p>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Note" tone="neutral" icon="{{ terminoIcon }}" hint-size="100%,60px">{{ terminoNota }}</x-import>
+</div>
+</x-import>
+
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Sheet" open="{{ sheetModo }}" title="Cómo querés aportar" onClose="{{ cerrarSheet }}" footer="{{ footerListo }}" hint-size="100%,360px">
+<div style="display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ modos }}" as="mo" hint-placeholder-count="3">
+<button type="button" class="{{ mo.clsMeta }}" onClick="{{ mo.elegirMeta }}" style="display:flex;align-items:flex-start;gap:12px;padding:14px var(--card-padding)">
+<span style="display:flex;margin-top:2px;color:var(--action-primary)"><x-import component-from-global-scope="IEBDesignSystem_afd037.Icon" name="{{ mo.icon }}" size="{{ veinte }}" hint-size="20px,20px"></x-import></span>
+<span style="min-width:0;display:flex;flex-direction:column"><span class="ieb-row-title">{{ mo.label }}</span><span class="ieb-row-sub">{{ mo.desc }}</span></span>
+</button>
+</sc-for>
+</div>
+</x-import>
+
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Sheet" open="{{ sheetSumar }}" title="Sumar un aporte" onClose="{{ cerrarSheet }}" footer="{{ footerConfirmarAporte }}" hint-size="100%,320px">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.AmountInput" label="Cuánto querés sumar" value="{{ aporteExtraRaw }}" presets="{{ aportePresets }}" onChange="{{ setAporteExtra }}" onPreset="{{ setAporteExtraPreset }}" help="Se acredita en tu meta el mismo día." hint-size="100%,180px"></x-import>
+</x-import>
+
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Sheet" open="{{ sheetMovimientos }}" title="Movimientos" onClose="{{ cerrarSheet }}" footer="{{ footerEntendido }}" hint-size="100%,340px">
+<sc-for list="{{ movimientos }}" as="mv" hint-placeholder-count="4">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.ListRow" icon="{{ mv.icon }}" title="{{ mv.label }}" subtitle="{{ mv.fecha }}" value="{{ mv.monto }}" chevron="{{ falso }}" hint-size="100%,60px"></x-import>
+</sc-for>
+</x-import>
+
+</div>
+
+<sc-if value="{{ verPanel }}" hint-placeholder-val="{{ true }}">
+<div style="width:320px;flex:none;display:flex;flex-direction:column;gap:14px;background:#FFFFFF;border:1px solid rgba(29,0,60,.1);border-radius:16px;padding:18px;box-shadow:0 10px 30px rgba(29,0,60,.08)">
+<div style="display:flex;flex-direction:column;gap:4px">
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#6200EE">Panel de prueba</span>
+<span style="font:400 13px/19px 'Nunito Sans',system-ui,sans-serif;color:#6B6B76;text-wrap:pretty">Fuera de la app. Saltá a cada etapa del recorrido, disparás estados y ves los eventos que se miden.</span>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:8px">
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:13px;font-weight:700;color:#111111">Recorrido</span>
+<div style="display:flex;flex-direction:column;gap:6px">
+<sc-for list="{{ etapas }}" as="et" hint-placeholder-count="5">
+<button type="button" onClick="{{ et.run }}" style="display:flex;align-items:baseline;gap:10px;text-align:left;font-family:'Nunito',system-ui,sans-serif;font-size:13px;font-weight:700;color:#2E005F;background:#FFFFFF;border:1.5px solid #E2E2E8;border-radius:10px;padding:9px 12px;cursor:pointer" style-hover="border-color:#6200EE;background:#F3E8FF" style-active="transform:scale(0.98)">
+<span style="font-variant-numeric:tabular-nums;color:#6200EE">{{ et.num }}</span>
+<span>{{ et.label }}</span>
+<span style="margin-left:auto;font:400 11.5px 'Nunito Sans',system-ui,sans-serif;color:#6B6B76">{{ et.pantalla }}</span>
+</button>
+</sc-for>
+</div>
+</div>
+
+<div style="height:1px;background:rgba(29,0,60,.1)"></div>
+
+<div style="display:flex;flex-direction:column;gap:8px">
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:13px;font-weight:700;color:#111111">Estados de la meta</span>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ acciones }}" as="ac" hint-placeholder-count="6">
+<button type="button" onClick="{{ ac.run }}" style="font-family:'Nunito',system-ui,sans-serif;font-size:12.5px;font-weight:700;color:#2E005F;background:#F3E8FF;border:1.5px solid transparent;border-radius:8px;padding:8px 11px;cursor:pointer" style-hover="border-color:#6200EE" style-active="transform:scale(0.98)">{{ ac.label }}</button>
+</sc-for>
+</div>
+</div>
+
+<div style="height:1px;background:rgba(29,0,60,.1)"></div>
+
+<div style="display:flex;flex-direction:column;gap:8px">
+<div style="display:flex;align-items:baseline;gap:8px">
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:13px;font-weight:700;color:#111111">Eventos medidos</span>
+<span style="margin-left:auto;font:400 12px 'Nunito Sans',system-ui,sans-serif;color:#6B6B76">{{ eventosCount }}</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:6px;max-height:300px;overflow-y:auto">
+<sc-for list="{{ eventos }}" as="ev" hint-placeholder-count="3">
+<div style="display:flex;align-items:baseline;gap:8px;padding:8px 10px;background:#F5F5F7;border-radius:8px">
+<span style="font-family:ui-monospace,Menlo,monospace;font-size:11px;font-weight:600;color:#2E005F">{{ ev.name }}</span>
+<span style="margin-left:auto;font:400 11px 'Nunito Sans',system-ui,sans-serif;color:#6B6B76;text-align:right">{{ ev.detail }}</span>
+</div>
+</sc-for>
+</div>
+<span style="font:400 12px/18px 'Nunito Sans',system-ui,sans-serif;color:#6B6B76;text-wrap:pretty">Cubre abandono por etapa, uso de simulación y del glosario, apertura del por qué, opción elegida vs. sugerida, primer aporte, aportes programados y salteados, avisos abiertos y adaptaciones del plan.</span>
+</div>
+</div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:800,&quot;height&quot;:900},&quot;tema&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Claro&quot;,&quot;Oscuro&quot;],&quot;default&quot;:&quot;Claro&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Apariencia&quot;},&quot;verPanel&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Prototipo&quot;},&quot;pantalla&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;},&quot;hoja&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;},&quot;scroll&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;number&quot;}}">
+const MESES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+const HOY = new Date(2026, 8, 24);
+
+function money(n) { return "$" + Math.round(Number(n) || 0).toLocaleString("es-AR"); }
+function pct1(n) { return (n >= 0 ? "+" : "") + n.toLocaleString("es-AR", { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + "%"; }
+function fechaEn(m) { const d = new Date(HOY.getFullYear(), HOY.getMonth() + m, 1); return MESES[d.getMonth()] + " " + d.getFullYear(); }
+function cardCls(sel) { return "ieb-card is-interactive" + (sel ? " is-selected" : ""); }
+function r500(n) { return Math.max(500, Math.round(n / 500) * 500); }
+function necesario(monto, meses) { return Math.max(0, Math.ceil(monto / Math.max(1, meses) / 500) * 500); }
+function sugInicial(m) { return Math.max(5000, Math.round(m * 0.05 / 5000) * 5000); }
+const SALDO = 120000;
+
+const TIPOS = [
+  { id: "viaje", label: "Viajar", nombre: "Viaje", para: "para tu viaje", icon: "plane", hint: "En 12 a 18 meses", monto: 900000, meses: 18, liquidez: "parcial" },
+  { id: "emergencia", label: "Fondo de emergencia", nombre: "Fondo de emergencia", para: "para tu fondo de emergencia", icon: "umbrella", hint: "Tres meses de gastos", monto: 450000, meses: 9, liquidez: "alta" },
+  { id: "independizarme", label: "Independizarme", nombre: "Independizarme", para: "para independizarte", icon: "house", hint: "Mudanza y primeros meses", monto: 1500000, meses: 24, liquidez: "parcial" },
+  { id: "comprar", label: "Comprar algo", nombre: "Una compra", para: "para tu compra", icon: "shopping-bag", hint: "Una compu, una moto", monto: 600000, meses: 12, liquidez: "parcial" },
+  { id: "crecer", label: "Hacer crecer mis ahorros", nombre: "Ahorro a largo plazo", para: "a largo plazo", icon: "sprout", hint: "Sin fecha fija", monto: 2000000, meses: 36, liquidez: "nula" },
+  { id: "otro", label: "Otra meta", nombre: "Mi meta", para: "para tu meta", icon: "sparkles", hint: "Contanos cuál", monto: 500000, meses: 12, liquidez: "parcial" }
+];
+
+const MODOS = [
+  { id: "mensual", label: "Aporte programado", desc: "Lo debitamos solo el día que elijas. No tenés que acordarte.", icon: "calendar-check" },
+  { id: "cuando_cobro", label: "Cuando entra dinero", desc: "Te avisamos cuando cobrás y confirmás con un toque.", icon: "wallet" },
+  { id: "extra", label: "Solo aportes extra", desc: "Nada automático. Sumás cuando te sobra.", icon: "plus" }
+];
+
+const LIQ = [
+  { id: "alta", label: "Sí, podría necesitarla en cualquier momento", desc: "Priorizamos que la tengas disponible en 24 horas.", corto: "Alta" },
+  { id: "parcial", label: "Podría necesitar una parte", desc: "Dejamos una porción líquida y el resto trabajando.", corto: "Parcial" },
+  { id: "nula", label: "No la voy a tocar hasta la fecha", desc: "Podemos buscar más rendimiento aceptando más movimiento.", corto: "Baja" }
+];
+
+const PLANES = {
+  rookie: { nombre: "Rookie", precio: "Sin costo", incluye: "Fondos comunes, Dólar MEP y CCL" },
+  investor: { nombre: "Investor", precio: "$5.000 + IVA", incluye: "Suma acciones, bonos, CEDEARs y ONs" }
+};
+
+const NIVELES = ["conservador", "intermedio", "arriesgado"];
+const OPCIONES = {
+  conservador: {
+    id: "conservador", corto: "Riesgo bajo", nombre: "Fondo IEB+ Ahorro Pesos", riesgo: "Riesgo bajo", tone: "positive", g: 0.03,
+    tna: "32% anual est.", costo: "1,2% anual", rescate: "24 horas", rescateCorto: "24 h", plan: "rookie",
+    reason: "Se mueve poco. Priorizamos que la plata esté cuando la necesites.",
+    riesgoTexto: "Puede rendir menos que la inflación en algún mes, pero casi no baja de valor. Es la opción más previsible que tenemos.",
+    peorMes: "-0,9%", recuperacion: "3 semanas",
+    composicion: [
+      { label: "Cuentas remuneradas", peso: "45%", valor: 45, desc: "Disponible en el día." },
+      { label: "Letras del Tesoro cortas", peso: "40%", valor: 40, desc: "Vencen en pocas semanas." },
+      { label: "Plazos fijos precancelables", peso: "15%", valor: 15, desc: "Suman tasa sin atar la plata." }
+    ],
+    researchTitulo: "Tasas altas favorecen quedarse corto",
+    researchSimple: "Con las tasas donde están, los instrumentos cortos rinden parecido a los largos con mucho menos movimiento. Por eso no alargamos plazos este mes.",
+    researchTecnico: "La curva en pesos se mantiene invertida en el tramo corto. El carry de LECAP a 90 días compensa la duration adicional del tramo medio con menor volatilidad."
+  },
+  intermedio: {
+    id: "intermedio", corto: "Riesgo medio", nombre: "Cartera IEB+ Meta", riesgo: "Riesgo medio", tone: "brand", g: 0.07,
+    tna: "41% anual est.", costo: "1,5% anual", rescate: "48 horas", rescateCorto: "48 h", plan: "rookie",
+    reason: "Mezcla fondos de renta fija con una parte en dólares para tu plazo.",
+    riesgoTexto: "El valor puede subir y bajar en el corto plazo. En un mes malo podés ver la meta en rojo sin que eso cambie el plan.",
+    peorMes: "-4,2%", recuperacion: "2 meses",
+    composicion: [
+      { label: "Fondo de renta fija en pesos", peso: "50%", valor: 50, desc: "Letras y bonos cortos y medianos." },
+      { label: "Fondo CER", peso: "25%", valor: 25, desc: "Se ajusta por inflación." },
+      { label: "Dólar MEP", peso: "25%", valor: 25, desc: "Cobertura si el peso se devalúa." }
+    ],
+    researchTitulo: "Para uno o dos años, conviene mezclar",
+    researchSimple: "Para metas de uno a dos años conviene tener algo corto para poder salir y algo que te cubra si los precios o el dólar se aceleran.",
+    researchTecnico: "Combinamos FCI de renta fija de corto y mediano plazo con un FCI CER para cubrir inflación, y 25% en dólar MEP para reducir la exposición a un salto cambiario."
+  },
+  arriesgado: {
+    id: "arriesgado", corto: "Riesgo alto", nombre: "Cartera IEB+ Crecimiento", riesgo: "Riesgo alto", tone: "warning", g: 0.12,
+    tna: "52% anual est.", costo: "1,8% anual", rescate: "72 horas", rescateCorto: "72 h", plan: "investor",
+    reason: "Más movimiento a cambio de más rendimiento posible, si no vas a tocar la plata.",
+    riesgoTexto: "Puede subir y bajar fuerte. Solo tiene sentido si podés esperar varios años sin tocarla.",
+    peorMes: "-11,4%", recuperacion: "7 meses",
+    composicion: [
+      { label: "CEDEARs", peso: "45%", valor: 45, desc: "Empresas del exterior, en pesos." },
+      { label: "Acciones argentinas", peso: "35%", valor: 35, desc: "Empresas locales líderes." },
+      { label: "Obligaciones negociables", peso: "20%", valor: 20, desc: "Deuda de empresas. Amortigua caídas." }
+    ],
+    researchTitulo: "Renta variable con horizonte largo",
+    researchSimple: "En plazos largos las acciones suelen ganarle a la renta fija, pero el camino es mucho más movido. No es para plata que necesitás pronto.",
+    researchTecnico: "Sobreponderamos energía y bancos locales con múltiplos por debajo de comparables regionales, diversificando vía CEDEARs para reducir riesgo idiosincrático."
+  }
+};
+
+const TERMINOS = {
+  fci: { titulo: "Fondo común de inversión", icon: "layers", texto: "Juntás tu plata con la de otras personas y un equipo profesional la invierte. Entrás y salís cuando quieras, desde montos chicos.", nota: "Están en el plan Rookie, sin costo." },
+  mep: { titulo: "Dólar MEP", icon: "dollar-sign", texto: "Es una forma legal de comprar dólares a través de bonos. Sirve para que una parte de tu meta no dependa solo del peso.", nota: "Está en el plan Rookie, sin costo." },
+  cedear: { titulo: "CEDEAR", icon: "globe", texto: "Es un certificado que te permite tener, en pesos, una parte de una empresa del exterior. Sigue el precio de la acción y del dólar.", nota: "Necesita el plan Investor: $5.000 + IVA, solo los meses que operás." },
+  rescate: { titulo: "Rescate", icon: "unlock", texto: "Es el tiempo entre que pedís tu plata y la tenés disponible en tu cuenta. Las opciones más estables suelen rescatarse en un día; las que se mueven más, en dos o tres.", nota: "Antes de confirmar te mostramos cuánto tarda cada opción." },
+  plan: { titulo: "Plan IEB+", icon: "layers", texto: "Es el nivel de acceso de tu cuenta. Rookie no tiene costo y trae fondos comunes y dólar MEP. Investor suma acciones, bonos y CEDEARs.", nota: "Investor cuesta $5.000 + IVA y solo se cobra los meses que operás." },
+  programado: { titulo: "Aporte programado", icon: "calendar-check", texto: "Elegís cuánto y qué día del mes. IEB+ lo debita de tu cuenta y lo invierte por vos, así no tenés que acordarte.", nota: "Podés saltearlo un mes o cambiarlo cuando quieras." },
+  rendimiento: { titulo: "Rendimiento", icon: "trending-up", texto: "Es lo que ganó o perdió tu plata además de lo que aportaste. Un mes en rojo no es una pérdida definitiva mientras no vendas.", nota: "El rendimiento pasado no garantiza el futuro." },
+  revision: { titulo: "Revisión de estrategia", icon: "compass", texto: "Cada tanto el equipo de IEB Research revisa si tu opción sigue siendo la adecuada para tu plazo. Te contamos qué cambió y si conviene hacer algo.", nota: "Casi siempre la respuesta es mantener." },
+  liquidez: { titulo: "Liquidez", icon: "unlock", texto: "Es qué tan rápido podés convertir tu inversión en plata disponible. Más liquidez suele venir con menos rendimiento.", nota: "Por eso te preguntamos si podrías necesitar la plata antes." },
+  live: { titulo: "IEB+ LIVE", icon: "radio", texto: "Charlas en vivo con el equipo de IEB Research. Preguntás lo que quieras sobre tu meta o sobre el mercado.", nota: "Próxima: jueves 1 de octubre a las 19 h." },
+  house: { titulo: "House IEB+", icon: "users", texto: "Encuentros presenciales para aprender a invertir junto a otras personas que también están empezando.", nota: "Te avisamos cuando haya uno cerca." }
+};
+
+const REVISIONES = [
+  { fecha: "18 de septiembre", cambio: "El fondo CER bajó 1,8% en la última semana por la suba de tasas.", impacto: "Mueve tu fecha estimada unos 6 días. Seguís en ritmo." },
+  { fecha: "24 de septiembre", cambio: "Las tasas cortas se acomodaron y la cartera recuperó 1,3%.", impacto: "Volvés al ritmo que tenías a principios de mes." }
+];
+
+class Component extends DCLogic {
+  scrollRef = React.createRef();
+  state = {
+    screen: "entrada",
+    sheet: null,
+    termino: "fci",
+    draft: null,
+    opcion: null,
+    experiencia: null,
+    perfilReaccion: null,
+    perfilRiesgo: null,
+    consent: false,
+    metas: [{
+      id: "g1", label: "Viaje a Brasil", icon: "plane", objetivo: 900000, ahorrado: 378000, aportado: 350000,
+      meses: 14, aporte: 38000, modo: "mensual", dia: 5, instr: "intermedio", ritmo: "en_ritmo",
+      salteados: 0, revision: 0,
+      movimientos: [
+        { icon: "arrow-up-right", label: "Aporte programado", fecha: "5 de septiembre", monto: "$38.000" },
+        { icon: "trending-up", label: "Resultado del mes", fecha: "31 de agosto", monto: "+$9.400" },
+        { icon: "arrow-up-right", label: "Aporte programado", fecha: "5 de agosto", monto: "$38.000" },
+        { icon: "arrow-up-right", label: "Aporte programado", fecha: "5 de julio", monto: "$38.000" }
+      ]
+    }],
+    metaId: "g1",
+    nivelAporte: "sugerido",
+    motivo: null,
+    ajuste: null,
+    aporteExtra: "20000",
+    ultimoAporte: 0,
+    eventos: [{ name: "metas_abierta", detail: "entrada" }]
+  };
+
+  preparar(p, hoja, scroll) {
+    const perfil = { experiencia: "poco", perfilReaccion: "esperar", perfilRiesgo: "intermedio" };
+    const map = {
+      entrada: { screen: "entrada", draft: null },
+      crear: { screen: "crear" },
+      perfil: Object.assign({ screen: "perfil" }, perfil),
+      plan: Object.assign({ screen: "plan" }, perfil),
+      invertir: Object.assign({ screen: "invertir", opcion: "intermedio", consent: true }, perfil),
+      simulacion: Object.assign({ screen: "simulacion" }, perfil),
+      listo: Object.assign({ screen: "listo" }, perfil),
+      detalle: { screen: "detalle" },
+      detalle_desvio: { screen: "detalle" },
+      ajustar: { screen: "ajustar", motivo: "atraso", ajuste: "fecha" }
+    };
+    this.setState(Object.assign({ sheet: hoja || null, draft: this.nuevoDraft(TIPOS[0]) }, map[p] || map.entrada));
+    if (p === "detalle_desvio" || p === "ajustar") this.updMeta({ ritmo: "fuera_de_ritmo", salteados: 2 });
+    const off = Number(scroll) || 0;
+    if (off) [80, 400, 1200].forEach(t => setTimeout(() => {
+      const c = this.scrollRef.current && this.scrollRef.current.firstElementChild;
+      if (c) c.style.marginTop = (-off) + "px";
+    }, t));
+  }
+  componentDidMount() {
+    if (this.props.pantalla) this.preparar(this.props.pantalla, this.props.hoja, this.props.scroll);
+    this.aplicarTema();
+    setTimeout(() => this.aplicarTema(), 0);
+    setTimeout(() => this.aplicarTema(), 400);
+    this.shimIconos();
+  }
+  componentDidUpdate() { this.aplicarTema(); this.shimIconos(); }
+
+  shimIconos() {
+    if (!window.__iebIconCache) window.__iebIconCache = {};
+    const cache = window.__iebIconCache;
+    const nodes = document.querySelectorAll(".ieb-icon");
+    for (let i = 0; i < nodes.length; i++) {
+      const el = nodes[i];
+      const raw = el.style.maskImage || el.style.webkitMaskImage || "";
+      const hit = /icons\/([a-z0-9-]+)\.svg/.exec(raw);
+      if (!hit) continue;
+      const name = hit[1];
+      const val = cache[name];
+      if (typeof val === "string") {
+        el.style.maskImage = val;
+        el.style.webkitMaskImage = val;
+      } else if (val === undefined) {
+        cache[name] = null;
+        fetch("https://cdn.jsdelivr.net/npm/lucide-static@1.52.0/icons/" + name + ".svg")
+          .then(r => r.text())
+          .then(txt => {
+            cache[name] = 'url("data:image/svg+xml,' + encodeURIComponent(txt) + '")';
+            this.shimIconos();
+          })
+          .catch(() => { cache[name] = ""; });
+      }
+    }
+  }
+  aplicarTema() {
+    const t = this.props.tema === "Oscuro" ? "dark" : "light";
+    if (window.IEBTheme && window.IEBTheme.get() !== t) window.IEBTheme.set(t);
+    if (document.documentElement.getAttribute("data-theme") !== t) document.documentElement.setAttribute("data-theme", t);
+  }
+
+  track(name, detail) {
+    this.setState(s => ({ eventos: [{ name: name, detail: detail || "" }].concat(s.eventos).slice(0, 40) }));
+  }
+  go(screen, evt, detail) {
+    this.setState({ screen: screen, sheet: null });
+    if (evt) this.track(evt, detail);
+  }
+
+  nuevoDraft(t) {
+    return { tipo: t.id, label: t.label, nombre: t.nombre, para: t.para, icon: t.icon, monto: t.monto, meses: t.meses, liquidez: t.liquidez, inicial: sugInicial(t.monto), aporte: necesario(t.monto - sugInicial(t.monto), t.meses), aporteManual: false, modo: "mensual", dia: 5 };
+  }
+  draftOrDefault() {
+    const d = this.state.draft;
+    if (!d) return this.nuevoDraft(TIPOS[0]);
+    const t = TIPOS.find(x => x.id === d.tipo) || TIPOS[0];
+    const base = this.nuevoDraft(t);
+    const out = Object.assign({}, base, d);
+    if (out.inicial === undefined) out.inicial = sugInicial(out.monto);
+    if (!out.aporte) out.aporte = necesario(out.monto - out.inicial, out.meses);
+    if (!out.para) out.para = base.para;
+    if (!out.nombre) out.nombre = base.nombre;
+    return out;
+  }
+
+  recomendada(d) {
+    let lvl = { conservador: 1, intermedio: 2, arriesgado: 3 }[this.state.perfilRiesgo] || 2;
+    if (this.state.perfilReaccion === "vender") lvl = Math.max(1, lvl - 1);
+    if (this.state.experiencia === "nunca") lvl = Math.min(lvl, 2);
+    if (d.liquidez === "alta" || d.meses <= 9) lvl = 1;
+    else if (d.meses < 24 || d.liquidez === "parcial") lvl = Math.min(lvl, 2);
+    return OPCIONES[NIVELES[lvl - 1]];
+  }
+
+  llegarias(op, aporte, meses, inicial) { return (inicial || 0) * (1 + op.g * meses / 12) + aporte * meses * (1 + op.g * meses / 24); }
+
+  metaActual() { return this.state.metas.find(m => m.id === this.state.metaId) || this.state.metas[0]; }
+  updMeta(patch) { this.setState(s => ({ metas: s.metas.map(m => m.id === s.metaId ? Object.assign({}, m, patch) : m) })); }
+
+  patchDraft(patch) {
+    this.setState(s => {
+      const next = Object.assign({}, s.draft || this.nuevoDraft(TIPOS[0]), patch);
+      if (patch.aporte !== undefined) next.aporteManual = true;
+      else if (!next.aporteManual && (patch.monto !== undefined || patch.meses !== undefined || patch.inicial !== undefined)) next.aporte = necesario(next.monto - (next.inicial || 0), next.meses);
+      return { draft: next };
+    });
+  }
+
+  atras() {
+    const orden = { crear: "entrada", perfil: "crear", plan: "perfil", invertir: "plan", simulacion: this.state.draft ? "crear" : "entrada", listo: "entrada", detalle: "entrada", ajustar: "detalle" };
+    if (["crear", "perfil", "plan", "invertir"].indexOf(this.state.screen) >= 0) this.track("creacion_paso_atras", this.state.screen);
+    this.go(orden[this.state.screen] || "entrada");
+  }
+
+  elegirOpcion(op, rec) {
+    this.setState({ opcion: op.id, consent: false });
+    this.go("invertir", op.id === rec.id ? "opcion_sugerida_elegida" : "opcion_alternativa_elegida", op.id);
+  }
+
+  crearMeta(op) {
+    const d = this.draftOrDefault();
+    const id = "g" + (this.state.metas.length + 1);
+    const nueva = {
+      id: id, label: d.nombre, icon: d.icon, objetivo: d.monto, ahorrado: d.inicial, aportado: d.inicial,
+      meses: d.meses, aporte: d.aporte, modo: d.modo, dia: d.dia, instr: op.id, ritmo: "en_ritmo",
+      salteados: 0, revision: 0,
+      movimientos: d.inicial > 0 ? [{ icon: "arrow-up-right", label: "Inversión inicial", fecha: "24 de septiembre", monto: money(d.inicial) }] : []
+    };
+    this.setState(s => ({ metas: s.metas.concat([nueva]), metaId: id, screen: "listo", sheet: null, ultimoAporte: d.inicial }));
+    this.track("meta_creada", d.nombre + " · " + op.id);
+    this.track("inversion_inicial", money(d.inicial));
+    if (d.modo === "mensual") this.track("aporte_programado", "día " + d.dia);
+  }
+
+  confirmarAporte() {
+    const monto = Number(this.state.aporteExtra) || 0;
+    const meta = this.metaActual();
+    this.updMeta({
+      ahorrado: meta.ahorrado + monto, aportado: meta.aportado + monto,
+      movimientos: [{ icon: "arrow-up-right", label: "Aporte extra", fecha: "24 de septiembre", monto: money(monto) }].concat(meta.movimientos)
+    });
+    this.setState({ sheet: null });
+    this.track("aporte_extra", money(monto));
+  }
+
+  opcionesAjuste(meta, motivo) {
+    const falta = Math.max(0, meta.objetivo - meta.ahorrado);
+    const a = meta.aporte;
+    const mesesCon = x => Math.ceil(falta / Math.max(1, x));
+    if (motivo === "menos") {
+      const a2 = r500(a * 0.7), m2 = mesesCon(a2), obj2 = meta.ahorrado + a2 * meta.meses;
+      return [
+        { id: "bajar", icon: "arrow-down", label: "Bajar el aporte", valor: money(a2), efecto: "Aportás menos y llegás en " + fechaEn(m2) + ", " + Math.max(0, m2 - meta.meses) + " meses más tarde.", patch: { aporte: a2, meses: m2 } },
+        { id: "pausar", icon: "pause", label: "Pausar dos meses", valor: fechaEn(meta.meses + 2), efecto: "No se debita nada hasta " + fechaEn(2) + ". Después seguís con " + money(a) + ".", patch: { meses: meta.meses + 2 } },
+        { id: "objetivo_menos", icon: "target", label: "Bajar el aporte y el objetivo", valor: money(obj2), efecto: "Aportás " + money(a2) + " y mantenés la fecha, " + fechaEn(meta.meses) + ", con un objetivo más chico.", patch: { aporte: a2, objetivo: obj2 } }
+      ];
+    }
+    if (motivo === "mas") {
+      const a2 = r500(a * 1.3), m2 = mesesCon(a2);
+      return [
+        { id: "subir", icon: "arrow-up", label: "Subir el aporte", valor: money(a2), efecto: "Llegás en " + fechaEn(m2) + ", " + Math.max(0, meta.meses - m2) + " meses antes de lo previsto.", patch: { aporte: a2, meses: m2 } },
+        { id: "extra", icon: "plus", label: "Sumar un aporte único", valor: "Hoy", efecto: "Mantenés el aporte de siempre y sumás una vez lo que te sobró.", patch: null }
+      ];
+    }
+    return [
+      { id: "aporte", icon: "arrow-up", label: "Subir el aporte", valor: money(r500(a * 1.22)), efecto: "Llegás a " + money(meta.objetivo) + " en la fecha que tenías, " + fechaEn(meta.meses) + ".", patch: { aporte: r500(a * 1.22) } },
+      { id: "fecha", icon: "calendar", label: "Mover la fecha", valor: fechaEn(meta.meses + 3), efecto: "Seguís aportando " + money(a) + " y llegás tres meses más tarde.", patch: { meses: meta.meses + 3 } },
+      { id: "objetivo", icon: "target", label: "Bajar el objetivo", valor: money(Math.round(meta.objetivo * 0.88 / 1000) * 1000), efecto: "Con el aporte de hoy llegás en " + fechaEn(meta.meses) + " a un objetivo 12% más chico.", patch: { objetivo: Math.round(meta.objetivo * 0.88 / 1000) * 1000 } }
+    ];
+  }
+
+  aplicarAjuste(lista) {
+    const sel = lista.find(x => x.id === this.state.ajuste);
+    if (!sel) return;
+    this.track("ajuste_elegido", sel.id);
+    if (!sel.patch) { this.setState({ ajuste: null, screen: "detalle", sheet: "sumar" }); return; }
+    this.updMeta(Object.assign({ ritmo: "en_ritmo", salteados: 0 }, sel.patch));
+    this.setState({ ajuste: null, screen: "detalle", sheet: null });
+  }
+
+  saltarA(screen) {
+    const st = this.state;
+    const patch = { screen: screen, sheet: null };
+    if (!st.draft) patch.draft = this.nuevoDraft(TIPOS[0]);
+    if (screen === "invertir" && !st.opcion) patch.opcion = "intermedio";
+    this.setState(patch);
+    this.track("panel_etapa", screen);
+  }
+
+  renderVals() {
+    const st = this.state;
+    const d = this.draftOrDefault();
+    const screen = st.screen;
+    const rec = this.recomendada(d);
+    const op = OPCIONES[st.opcion] || rec;
+    const plan = PLANES[op.plan] || PLANES.rookie;
+    const liq = LIQ.find(l => l.id === d.liquidez) || LIQ[1];
+    const modo = MODOS.find(m => m.id === d.modo) || MODOS[0];
+    const metaRaw = this.metaActual();
+    const meta = Object.assign({ aportado: metaRaw.ahorrado, dia: 5, movimientos: [] }, metaRaw);
+    const metaOp = OPCIONES[meta.instr] || OPCIONES.intermedio;
+    const fuera = meta.ritmo === "fuera_de_ritmo";
+    const percent = Math.min(100, Math.round(meta.ahorrado / meta.objetivo * 100));
+    const rev = REVISIONES[meta.revision] || REVISIONES[0];
+    const perfilListo = !!(st.experiencia && st.perfilReaccion && st.perfilRiesgo);
+    const salteados = meta.salteados || 2;
+    const resto = Math.max(0, d.monto - d.inicial);
+    const nec = necesario(resto, d.meses);
+    const mesesReales = Math.ceil(resto / Math.max(1, d.aporte));
+    const excede = d.inicial > SALDO;
+    const hoyTxt = d.inicial > 0 ? "Invirtiendo " + money(d.inicial) + " hoy y aportando " : "Sin invertir nada hoy y aportando ";
+    const brecha = mesesReales > d.meses;
+    const vista = (screen === "detalle" || screen === "ajustar") ? metaOp : screen === "plan" ? rec : op;
+    const motivo = st.motivo || (fuera ? "atraso" : "menos");
+    const ajustesLista = this.opcionesAjuste(meta, motivo);
+    const rend = meta.ahorrado - meta.aportado;
+
+    const barras = {
+      entrada: ["Metas", ""], crear: ["Tu meta", "Paso 1 de 4 · Conocer"],
+      perfil: ["Tu perfil", "Paso 2 de 4 · Entender"], plan: ["Tu plan", "Paso 3 de 4 · Elegir"],
+      invertir: ["Invertir", "Paso 4 de 4 · Invertir"],
+      simulacion: ["Simulación", "Sin invertir plata"], listo: ["Listo", ""],
+      detalle: [meta.label, "Seguir"], ajustar: ["Adaptar el plan", ""]
+    };
+    const bar = barras[screen] || ["Metas", ""];
+
+    const factor = { conservador: 0.8, sugerido: 1, holgado: 1.25 }[st.nivelAporte];
+    const simAporte = r500(d.aporte * factor);
+    const proyectado = simAporte * d.meses + d.inicial;
+
+    const ctas = {
+      crear: { label: "Continuar", icon: "arrow-right", action: () => this.go("perfil", "etapa_entender") },
+      perfil: { label: "Ver mi plan", icon: "arrow-right", disabled: !perfilListo, action: () => this.go("plan", "perfil_validado", st.perfilRiesgo) },
+      simulacion: { label: "Seguir con mi meta", icon: "arrow-right", action: () => this.go(st.draft ? "crear" : "entrada", "simulacion_cerrada") },
+      invertir: { label: "Invertir y crear la meta", icon: "check", disabled: !st.consent || excede, action: () => this.crearMeta(op) },
+      listo: { label: "Ver mi meta", icon: "arrow-right", action: () => this.go("detalle", "detalle_abierto") },
+      detalle: { label: "Sumar aporte", icon: "plus", action: () => this.setState({ sheet: "sumar" }), sec: { label: "Adaptar", action: () => this.go("ajustar", "adaptacion_explorada") } },
+      ajustar: { label: "Confirmar el cambio", icon: "check", disabled: !st.ajuste, action: () => this.aplicarAjuste(ajustesLista) }
+    };
+    const cta = ctas[screen];
+
+    const closeSheet = () => this.setState({ sheet: null });
+    const openSheet = (id, evt) => () => { this.setState({ sheet: id }); if (evt) this.track(evt, id); };
+    const openTermino = k => () => { this.setState({ sheet: "aprender", termino: k }); this.track("glosario_abierto", k); };
+    const R = React.createElement;
+    const Btn = window.IEBDesignSystem_afd037.Button;
+    const term = TERMINOS[st.termino] || TERMINOS.fci;
+    const ops = NIVELES.map(k => OPCIONES[k]);
+
+    const evo = (() => {
+      const gm = metaOp.g / 12;
+      const abr = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+      const mesHoy = 8;
+      const pasados = Math.min(6, Math.max(1, Math.round(meta.aportado / Math.max(1, meta.aporte))));
+      const futuros = Math.min(6, Math.max(1, meta.meses));
+      const hist = [];
+      let cur = meta.ahorrado;
+      for (let i = 0; i < pasados; i++) { hist.unshift(cur); cur = Math.max(0, (cur - meta.aporte) / (1 + gm)); }
+      const proy = [];
+      cur = meta.ahorrado;
+      for (let j = 0; j < futuros; j++) { cur = cur * (1 + gm) + meta.aporte; proy.push(cur); }
+      const h = v => Math.min(100, Math.round(v / Math.max(1, meta.objetivo) * 100)) + "%";
+      return {
+        bars: hist.map(v => ({ h: h(v), color: "var(--brand-primary)" })).concat(proy.map(v => ({ h: h(v), color: "var(--border-brand-soft)" }))),
+        desde: pasados > 1 ? abr[(mesHoy - (pasados - 1) + 12) % 12] : "Hoy",
+        hasta: abr[(mesHoy + futuros) % 12]
+      };
+    })();
+
+    const avisos = [];
+    if (fuera) avisos.push({ icon: "triangle-alert", titulo: "Te desviaste del plan", sub: "Salteaste " + salteados + " aportes", abrir: () => this.go("ajustar", "aviso_abierto", "desvio") });
+    avisos.push(
+      { icon: "bell", titulo: "Próximo aporte", sub: meta.modo === "mensual" ? meta.dia + " de octubre · " + money(meta.aporte) : "Te avisamos cuando cobres", abrir: openSheet("modo", "aviso_abierto") },
+      { icon: "newspaper", titulo: "Nuevo informe de Research", sub: metaOp.researchTitulo, abrir: openSheet("research", "aviso_abierto") },
+      { icon: "compass", titulo: "Revisamos tu estrategia", sub: "El " + rev.fecha + " · no hace falta cambiar nada", abrir: openSheet("porque", "aviso_abierto") }
+    );
+
+    return {
+      verPanel: this.props.verPanel !== false,
+      scrollRef: this.scrollRef,
+      verdadero: true, falso: false, noop: () => {},
+      cuatro: 4, dieciseis: 16, dieciocho: 18, veinte: 20, veintiocho: 28,
+
+      barTitle: bar[0], barEyebrow: bar[1],
+      barBack: screen === "entrada" ? null : () => this.atras(),
+      isFlow: ["crear", "perfil", "plan", "invertir"].indexOf(screen) >= 0,
+      flowStep: { crear: 1, perfil: 2, plan: 3, invertir: 4 }[screen] || 1,
+      isEntrada: screen === "entrada", isCrear: screen === "crear", isPerfil: screen === "perfil",
+      isPlan: screen === "plan", isInvertir: screen === "invertir", isSimulacion: screen === "simulacion",
+      isListo: screen === "listo", isDetalle: screen === "detalle", isAjustar: screen === "ajustar",
+
+      hayCta: !!cta,
+      ctaLabel: cta ? cta.label : "",
+      ctaIcon: cta ? cta.icon : "arrow-right",
+      ctaDisabled: cta ? !!cta.disabled : false,
+      ctaAction: cta ? cta.action : () => {},
+      haySecundario: !!(cta && cta.sec),
+      secLabel: cta && cta.sec ? cta.sec.label : "",
+      secAction: cta && cta.sec ? cta.sec.action : () => {},
+
+      tieneMetas: st.metas.length > 0,
+      totalInvertidoText: money(st.metas.reduce((a, m) => a + m.ahorrado, 0)),
+      totalAporteText: money(st.metas.reduce((a, m) => a + (m.modo === "mensual" ? m.aporte : 0), 0)),
+      totalMetasText: st.metas.length + (st.metas.length === 1 ? " meta activa" : " metas activas"),
+      metasResumen: st.metas.map(m => {
+        const p = Math.min(100, Math.round(m.ahorrado / m.objetivo * 100));
+        const off = m.ritmo === "fuera_de_ritmo";
+        return {
+          icon: m.icon, label: m.label, sub: (OPCIONES[m.instr] || OPCIONES.intermedio).nombre,
+          percent: p, badge: off ? "Fuera de ritmo" : p + "%", tone: off ? "warning" : "brand", barTone: off ? "warm" : "brand",
+          montos: money(m.ahorrado) + " de " + money(m.objetivo), fecha: fechaEn(m.meses),
+          abrir: () => { this.setState({ metaId: m.id }); this.go("detalle", "detalle_abierto", m.label); }
+        };
+      }),
+      tipos: TIPOS.map(t => ({
+        label: t.label, icon: t.icon, hint: t.hint,
+        elegir: () => { this.setState({ draft: this.nuevoDraft(t), opcion: null, consent: false }); this.go("crear", "etapa_conocer", t.id); }
+      })),
+      irSimulacion: e => { if (e && e.preventDefault) e.preventDefault(); this.go("simulacion", "simulacion_abierta", st.nivelAporte); },
+
+      draftIcon: d.icon, draftLabel: d.label,
+      montoText: money(d.monto), montoRaw: String(d.monto),
+      fechaText: fechaEn(d.meses), plazoSub: "En " + d.meses + " meses",
+      aporteText: money(d.aporte), aporteRaw: String(d.aporte),
+      liquidezCorto: liq.corto, liquidezIcon: d.liquidez === "nula" ? "lock" : "unlock",
+      resumenObjetivo: money(d.monto) + " para " + fechaEn(d.meses),
+      consecuenciaAporte: brecha
+        ? hoyTxt + money(d.aporte) + " por mes llegás en " + fechaEn(mesesReales) + ". Para llegar en " + fechaEn(d.meses) + " harían falta " + money(nec) + " por mes."
+        : hoyTxt + money(d.aporte) + " por mes llegás a " + money(d.monto) + " en " + fechaEn(d.meses) + ", sin contar lo que rinda.",
+      inicialText: money(d.inicial), inicialRaw: String(d.inicial),
+      inicialSub: excede ? "Supera tu saldo disponible" : "Sale de tu saldo hoy · tocá para cambiar",
+      abrirInicial: openSheet("inicial", "edicion_inicial"),
+      sheetInicial: st.sheet === "inicial",
+      setInicial: e => this.patchDraft({ inicial: Number(String(e.target.value).replace(/\D/g, "")) || 0 }),
+      setInicialPreset: p => this.patchDraft({ inicial: Number(p.value) }),
+      inicialPresets: [{ label: "$0", value: "0" }, { label: money(sugInicial(d.monto)), value: String(sugInicial(d.monto)) }, { label: "$100.000", value: "100000" }],
+      saldoExcedido: excede,
+      inicialTone: excede ? "warm" : "neutral",
+      inicialNota: excede
+        ? "Tu saldo disponible es " + money(SALDO) + ". Ingresá dinero a tu cuenta o invertí menos hoy."
+        : "Tenés " + money(SALDO) + " disponibles en tu cuenta.",
+      consecuenciaLiquidez: d.liquidez === "nula"
+        ? "Como no la vas a tocar, podemos buscar más rendimiento aceptando más movimiento."
+        : "Si podrías usar esta plata antes, conviene una alternativa más líquida. Es lo que vamos a priorizar.",
+
+      abrirMonto: openSheet("monto", "edicion_monto"),
+      abrirFecha: openSheet("fecha", "edicion_fecha"),
+      abrirAporte: openSheet("aporte", "edicion_aporte"),
+      abrirLiquidez: openSheet("liquidez", "edicion_liquidez"),
+      abrirPorque: openSheet("porque", "porque_abierto"),
+      abrirComposicion: openSheet("composicion", "detalle_composicion"),
+      abrirCostos: openSheet("costos", "detalle_costos"),
+      abrirRiesgo: openSheet("riesgo", "detalle_riesgo"),
+      abrirLiquidez2: openSheet("liq2", "detalle_rescate"),
+      abrirResearch: openSheet("research", "research_abierto"),
+      abrirModo: openSheet("modo", "edicion_modo_aporte"),
+      abrirMovimientos: openSheet("movimientos", "movimientos_abiertos"),
+      abrirLive: openTermino("live"), abrirHouse: openTermino("house"),
+      cerrarSheet: closeSheet,
+
+      sheetMonto: st.sheet === "monto", sheetFecha: st.sheet === "fecha", sheetAporte: st.sheet === "aporte",
+      sheetLiquidez: st.sheet === "liquidez", sheetPorque: st.sheet === "porque",
+      sheetComposicion: st.sheet === "composicion", sheetCostos: st.sheet === "costos",
+      sheetRiesgo: st.sheet === "riesgo", sheetLiq2: st.sheet === "liq2",
+      sheetResearch: st.sheet === "research", sheetAprender: st.sheet === "aprender",
+      sheetModo: st.sheet === "modo", sheetSumar: st.sheet === "sumar", sheetMovimientos: st.sheet === "movimientos",
+      footerListo: R(Btn, { block: true, size: "md", onClick: closeSheet }, "Listo"),
+      footerEntendido: R(Btn, { block: true, size: "md", variant: "secondary", onClick: closeSheet }, "Entendido"),
+      footerConfirmarAporte: R(Btn, { block: true, size: "md", onClick: () => this.confirmarAporte() }, "Confirmar aporte"),
+
+      montoPresets: [{ label: "$450.000", value: "450000" }, { label: "$900.000", value: "900000" }, { label: "$1.500.000", value: "1500000" }],
+      setMonto: e => this.patchDraft({ monto: Number(String(e.target.value).replace(/\D/g, "")) || 0 }),
+      setMontoPreset: p => this.patchDraft({ monto: Number(p.value) }),
+      setAporte: e => this.patchDraft({ aporte: Number(String(e.target.value).replace(/\D/g, "")) || 0 }),
+      plazos: [6, 9, 12, 18, 24, 36].map(m => ({ label: m + " meses", sel: d.meses === m, elegir: () => this.patchDraft({ meses: m }) })),
+      liquidezOpts: LIQ.map(l => ({ label: l.label, desc: l.desc, cls: cardCls(d.liquidez === l.id), elegir: () => this.patchDraft({ liquidez: l.id }) })),
+
+      experienciaOpts: [
+        { id: "nunca", label: "Nunca, sería la primera vez" },
+        { id: "poco", label: "Probé algo, pero no sé bien qué" },
+        { id: "seguido", label: "Sí, invierto seguido" }
+      ].map(o => ({ label: o.label, cls: cardCls(st.experiencia === o.id), elegir: () => { this.setState({ experiencia: o.id }); this.track("diagnostico_experiencia", o.id); } })),
+      reaccionOpts: [
+        { id: "vender", label: "Rescataría todo para no perder más" },
+        { id: "esperar", label: "Esperaría sin tocar nada" },
+        { id: "sumar", label: "Aprovecharía para sumar más" }
+      ].map(o => ({ label: o.label, cls: cardCls(st.perfilReaccion === o.id), elegir: () => this.setState({ perfilReaccion: o.id }) })),
+      riesgoElegido: st.perfilRiesgo,
+      setRiesgo: id => this.setState({ perfilRiesgo: id }),
+      perfilListo: perfilListo,
+      perfilResultado: st.perfilReaccion === "vender"
+        ? "Anotamos que preferís no ver caídas. Te vamos a sugerir lo más estable para tu plazo."
+        : "Anotamos que podés esperar un mes malo sin vender. Eso nos deja usar tu plazo completo.",
+
+      objetivoFrase: "Juntar " + money(d.monto) + " " + d.para + " para " + fechaEn(d.meses) + ".",
+      objetivoDatos: [
+        { label: "Hoy", valor: money(d.inicial) },
+        { label: "Por mes", valor: money(d.aporte) },
+        { label: "Llegás", valor: (() => { const f = fechaEn(Math.min(mesesReales, 120)).split(" "); return f[0].slice(0, 3) + ". " + f[1]; })() }
+      ],
+      hayBrecha: brecha,
+      brechaTexto: "Con tu aporte llegás " + (mesesReales - d.meses) + " meses después. Lo que rinda la inversión puede achicar esa diferencia, pero no lo podemos garantizar.",
+      esPrimeraVez: st.experiencia === "nunca",
+
+      recNombre: rec.nombre, recRiesgo: rec.riesgo, recReason: rec.reason,
+      recStats: [{ label: "Llegarías con", value: money(this.llegarias(rec, d.aporte, d.meses, d.inicial)) }, { label: "Plan", value: PLANES[rec.plan].nombre }],
+      elegirRec: () => this.elegirOpcion(rec, rec),
+      alternativas: ops.filter(o => o.id !== rec.id).map(o => ({
+        nombre: o.nombre, riesgo: o.riesgo, tone: o.tone, reason: o.reason,
+        resumen: "~" + money(this.llegarias(o, d.aporte, d.meses, d.inicial)) + " · Plan " + PLANES[o.plan].nombre,
+        elegir: () => this.elegirOpcion(o, rec)
+      })),
+      compHeader: ops.map(o => ({ label: o.corto, sugerida: o.id === rec.id })),
+      comparacion: [
+        { label: "Llegarías con", vals: ops.map(o => money(this.llegarias(o, d.aporte, d.meses, d.inicial))) },
+        { label: "Peor mes", vals: ops.map(o => o.peorMes) },
+        { label: "Rescate", vals: ops.map(o => o.rescateCorto) },
+        { label: "Plan IEB+", vals: ops.map(o => PLANES[o.plan].nombre) }
+      ].map(f => ({ label: f.label, a: f.vals[0], b: f.vals[1], c: f.vals[2] })),
+      terminosInvertir: [["rescate", "Rescate"], ["plan", "Plan IEB+"], ["programado", "Aporte programado"]].map(x => ({ label: x[1], abrir: openTermino(x[0]) })),
+      terminosDetalle: [["rendimiento", "Rendimiento"], ["revision", "Revisión de estrategia"], ["programado", "Aporte programado"]].map(x => ({ label: x[1], abrir: openTermino(x[0]) })),
+      terminosPlan: [["fci", "FCI"], ["mep", "Dólar MEP"], ["cedear", "CEDEAR"], ["liquidez", "Liquidez"]].map(x => ({ label: x[1], abrir: openTermino(x[0]) })),
+      razones: [
+        { icon: "calendar", titulo: "Tu plazo", texto: "Tu meta es en " + d.meses + " meses. " + (d.meses < 24 ? "En plazos cortos priorizamos que la plata no baje justo cuando la necesitás." : "Con más de dos años podés aguantar meses malos.") },
+        { icon: "unlock", titulo: "Tu disponibilidad", texto: d.liquidez === "nula" ? "No vas a necesitar la plata antes, así que podemos aceptar más movimiento." : "Podrías necesitar una parte antes, así que dejamos una porción que se rescata rápido." },
+        { icon: "shield-check", titulo: "Tu perfil", texto: st.perfilReaccion === "vender" ? "Nos dijiste que ante una caída rescatarías. Bajamos un nivel de riesgo." : "Nos dijiste que podés esperar un mes malo sin vender." },
+        { icon: "book-open", titulo: "Lo que ve IEB Research", texto: rec.researchSimple }
+      ],
+
+      opNombre: op.nombre, opRiesgo: op.riesgo + " · tocá para cambiar",
+      volverPlan: () => this.go("plan", "opcion_revisada"),
+      planTitulo: "Plan " + plan.nombre, planIncluye: plan.incluye, planPrecio: plan.precio,
+      necesitaInvestor: op.plan === "investor",
+      modos: MODOS.map(m => ({
+        label: m.label, desc: m.desc, icon: m.icon,
+        cls: cardCls(d.modo === m.id), elegir: () => this.patchDraft({ modo: m.id }),
+        clsMeta: cardCls(meta.modo === m.id), elegirMeta: () => { this.updMeta({ modo: m.id }); this.track("modo_aporte_cambiado", m.id); }
+      })),
+      esMensual: d.modo === "mensual",
+      dias: [1, 5, 10, 15].map(n => ({ label: "Día " + n, sel: d.dia === n, elegir: () => this.patchDraft({ dia: n }) })),
+      programadoTexto: d.modo === "mensual"
+        ? "Vamos a debitar " + money(d.aporte) + " el día " + d.dia + " de cada mes. Podés saltear un mes o pausarlo cuando quieras."
+        : d.modo === "cuando_cobro"
+          ? "Cuando detectemos que cobraste te mandamos un aviso para aportar " + money(d.aporte) + ". Confirmás con un toque."
+          : "No programamos nada. Te recordamos una vez por mes cuánto te falta.",
+
+      vistaNombre: vista.nombre,
+      costoResumen: vista.costo + ", sin costo de salida",
+      rescateResumen: vista.rescate,
+      textoRescate: "Si pedís el rescate hoy, la plata te queda disponible en " + vista.rescate + ". No hay penalidad ni plazo mínimo.",
+      riesgoTexto: vista.riesgoTexto, peorMes: vista.peorMes, recuperacion: vista.recuperacion,
+      composicion: vista.composicion,
+      costos: [
+        { label: "Costo del fondo o cartera", desc: "Ya descontado del rendimiento", valor: vista.costo },
+        { label: "Plan " + PLANES[vista.plan].nombre, desc: vista.plan === "investor" ? "Solo los meses que operás" : "Incluido para siempre", valor: PLANES[vista.plan].precio },
+        { label: "Salida antes de la fecha", desc: "Rescatás cuando quieras", valor: "Sin cargo" }
+      ],
+      researchMeta: "Informe semanal · " + rev.fecha,
+      researchTitulo: vista.researchTitulo, researchSimple: vista.researchSimple, researchTecnico: vista.researchTecnico,
+      terminoTitulo: term.titulo, terminoTexto: term.texto, terminoNota: term.nota, terminoIcon: term.icon,
+
+      nivelesAporte: [
+        { id: "conservador", label: "Menos" }, { id: "sugerido", label: "Lo que dije" }, { id: "holgado", label: "Más" }
+      ].map(n => ({ label: n.label, sel: st.nivelAporte === n.id, elegir: () => { this.setState({ nivelAporte: n.id }); this.track("simulacion_ajustada", n.id); } })),
+      simAporteText: money(simAporte),
+      simEsperado: money(this.llegarias(rec, simAporte, d.meses, d.inicial)),
+      escenarios: [
+        { icon: "trending-up", label: "Favorable", desc: "El mercado acompaña", monto: money(proyectado * (1 + rec.g * 2 * d.meses / 24)) },
+        { icon: "minus", label: "Esperado", desc: "Lo más probable", monto: money(this.llegarias(rec, simAporte, d.meses, d.inicial)) },
+        { icon: "trending-down", label: "Adverso", desc: "Meses malos seguidos", monto: money(proyectado * (1 - rec.g * 0.6 * d.meses / 24)) }
+      ],
+
+      consent: st.consent,
+      toggleConsent: () => this.setState({ consent: !st.consent }),
+      textoListo: (st.ultimoAporte > 0 ? "Invertimos " + money(st.ultimoAporte) + " hoy." : "Tu meta arranca con el primer aporte mensual.") + " Desde acá podés ver cómo avanza y ajustar cuando cambie tu situación.",
+
+      evoObjetivoText: money(meta.objetivo),
+      evoBars: evo.bars, evoDesde: evo.desde, evoHasta: evo.hasta,
+      metaIcon: meta.icon,
+      metaResumenLinea: "Objetivo " + money(meta.objetivo) + " · " + fechaEn(meta.meses),
+      metaEstado: fuera ? "Fuera de ritmo" : "En ritmo", metaTone: fuera ? "warning" : "positive",
+      metaPercent: percent, metaAhorradoText: money(meta.ahorrado),
+      metaFaltaText: money(Math.max(0, meta.objetivo - meta.ahorrado)),
+      metaFechaEstimada: fechaEn(fuera ? meta.meses + 3 : meta.meses),
+      metaAporteText: money(meta.aporte),
+      metaModoLabel: meta.modo === "mensual" ? "Programado, día " + meta.dia : (MODOS.find(m => m.id === meta.modo) || MODOS[0]).label,
+      metaAportadoText: money(meta.aportado),
+      metaRendText: (rend >= 0 ? "+" : "-") + money(Math.abs(rend)),
+      metaRendPct: pct1(rend / Math.max(1, meta.aportado) * 100) + " sobre lo aportado",
+      rendColor: rend >= 0 ? "var(--status-positive)" : "var(--status-negative)",
+      metaInstrumento: metaOp.nombre + " · " + metaOp.riesgo,
+      metaPlanTitulo: "Plan " + PLANES[metaOp.plan].nombre,
+      metaPlanPrecio: PLANES[metaOp.plan].precio + (metaOp.plan === "investor" ? " · solo meses que operás" : " · " + PLANES[metaOp.plan].incluye),
+      movResumen: meta.movimientos.length + " movimientos registrados",
+      movimientos: meta.movimientos,
+      fueraDeRitmo: fuera,
+      avisos: avisos,
+      revisionFecha: "Revisada el " + rev.fecha,
+      desvioNota: "Salteaste " + salteados + " aportes, así que a este ritmo llegás en " + fechaEn(meta.meses + 3) + ". Hay tres formas de acomodarlo y te mostramos el efecto de cada una.",
+      estrategiaBloques: fuera ? [
+        { icon: "compass", titulo: "Por qué la mantenemos", texto: "La inversión sigue siendo la adecuada para tu plazo. El desvío viene de los aportes, no del instrumento." },
+        { icon: "activity", titulo: "Qué cambió", texto: "Salteaste " + salteados + " aportes desde la última revisión." },
+        { icon: "target", titulo: "Qué impacto tiene en tu meta", texto: "A este ritmo llegás en " + fechaEn(meta.meses + 3) + ", tres meses más tarde." },
+        { icon: "calendar-clock", titulo: "Cuándo conviene ajustar", texto: "Ahora. Cuanto antes lo acomodes, más chico es el ajuste." }
+      ] : [
+        { icon: "compass", titulo: "Por qué la mantenemos", texto: "Tu meta es en " + meta.meses + " meses y querés poder usar una parte antes. Eso no cambió." },
+        { icon: "activity", titulo: "Qué cambió", texto: rev.cambio },
+        { icon: "target", titulo: "Qué impacto tiene en tu meta", texto: rev.impacto },
+        { icon: "calendar-clock", titulo: "Cuándo conviene revisar", texto: "Volvemos a mirar en una semana. Antes, solo si te desviás más de 10%." }
+      ],
+      irAjustar: () => this.go("ajustar", "adaptacion_explorada", "desde_alerta"),
+      saltearMes: () => { this.updMeta({ salteados: (meta.salteados || 0) + 1 }); this.track("aporte_salteado", meta.label); },
+
+      motivos: [
+        { id: "atraso", label: "Me atrasé con los aportes" },
+        { id: "menos", label: "Ahora puedo aportar menos" },
+        { id: "mas", label: "Ahora puedo aportar más" }
+      ].map(m => ({ label: m.label, sel: motivo === m.id, elegir: () => { this.setState({ motivo: m.id, ajuste: null }); this.track("motivo_adaptacion", m.id); } })),
+      motivoTexto: motivo === "atraso"
+        ? "Salteaste " + salteados + " aportes. Elegí cómo acomodarlo y te mostramos el efecto antes de confirmar."
+        : motivo === "menos"
+          ? "Si cobrás menos o tenés más gastos, el plan se adapta. Elegí la opción que te resulte más cómoda."
+          : "Si te sobra más plata, podés llegar antes. Elegí cómo usarla.",
+      ajustes: ajustesLista.map(a => ({ icon: a.icon, label: a.label, valor: a.valor, efecto: a.efecto, cls: cardCls(st.ajuste === a.id), elegir: () => { this.setState({ ajuste: a.id }); this.track("ajuste_evaluado", a.id); } })),
+
+      aporteExtraRaw: st.aporteExtra,
+      aportePresets: [{ label: "$10.000", value: "10000" }, { label: "$20.000", value: "20000" }, { label: "$50.000", value: "50000" }],
+      setAporteExtra: e => this.setState({ aporteExtra: String(e.target.value).replace(/\D/g, "") }),
+      setAporteExtraPreset: p => this.setState({ aporteExtra: String(p.value) }),
+
+      etapas: [
+        { num: "1", label: "Objetivo", pantalla: "¿Qué querés lograr?", s: "crear" },
+        { num: "2", label: "Entender", pantalla: "Perfil y riesgo", s: "perfil" },
+        { num: "3", label: "Elegir", pantalla: "Plan y opciones", s: "plan" },
+        { num: "4", label: "Invertir", pantalla: "Aporte programado", s: "invertir" },
+        { num: "5", label: "Seguir", pantalla: "Progreso y avisos", s: "detalle" }
+      ].map(e => ({ num: e.num, label: e.label, pantalla: e.pantalla, run: () => this.saltarA(e.s) })),
+      acciones: [
+        { label: "Marcar fuera de ritmo", run: () => { this.updMeta({ ritmo: "fuera_de_ritmo", salteados: 2 }); this.track("meta_fuera_de_ritmo", meta.label); } },
+        { label: "Volver a ritmo", run: () => { this.updMeta({ ritmo: "en_ritmo", salteados: 0 }); this.track("meta_en_ritmo", meta.label); } },
+        { label: "Nueva revisión de research", run: () => { const n = meta.revision === 0 ? 1 : 0; this.updMeta({ revision: n }); this.track("revision_publicada", REVISIONES[n].fecha); } },
+        { label: "Acreditar aporte programado", run: () => { this.updMeta({ ahorrado: meta.ahorrado + meta.aporte, aportado: meta.aportado + meta.aporte }); this.track("aporte_acreditado", money(meta.aporte)); } },
+        { label: "Mes de mercado malo", run: () => { this.updMeta({ ahorrado: Math.round(meta.ahorrado * 0.96) }); this.track("mercado_baja", "-4%"); } },
+        { label: "Abandonar la creación", run: () => { this.track("creacion_abandonada", "paso " + ({ crear: 1, perfil: 2, plan: 3, invertir: 4 }[st.screen] || 0)); this.go("entrada"); } },
+        { label: "Reiniciar", run: () => this.setState({ screen: "entrada", sheet: null, draft: null, opcion: null, consent: false, ajuste: null, motivo: null, experiencia: null, perfilReaccion: null, perfilRiesgo: null, eventos: [{ name: "sesion_reiniciada", detail: "" }] }) }
+      ],
+      eventos: st.eventos,
+      eventosCount: st.eventos.length + " eventos"
+    };
+  }
+}
+</script>
+</body>
+</html>

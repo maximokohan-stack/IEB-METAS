@@ -1,0 +1,164 @@
+:root{
+  /* Brand purple ramp — static reference palette, see guidelines/colors-brand-purple.html.
+     Not theme-dependent: documents the hues the theme tokens below are drawn from. */
+  --purple-950:#1D003C;
+  --purple-900:#2E005F;
+  --purple-800:#3F0088;
+  --purple-700:#4A00AD;
+  --purple-600:#5B00D6;
+  --purple-500:#6200EE;
+  --purple-400:#8B4DF2;
+  --purple-300:#B98CFF;
+  --purple-200:#DCC4FF;
+  --purple-100:#F3E8FF;
+  --purple-050:#FAF5FF;
+
+  /* Warm accent ramp */
+  --coral-600:#E85446;
+  --coral-500:#FF6F61;
+  --coral-200:#FFC5BF;
+  --coral-100:#FFEDEA;
+
+  /* Neutrals */
+  --white:#FFFFFF;
+  --gray-050:#F5F5F7;
+  --gray-100:#EDEDF1;
+  --gray-200:#E2E2E8;
+  --gray-300:#CFCFD8;
+  --gray-400:#A6A6B2;
+  --gray-600:#6B6B76;
+  --gray-800:#3A3A42;
+  --ink-900:#111111;
+}
+
+/* ---- THEME TOKENS — light (default, unchanged). Repeated on [data-theme="light"]
+   (not just :root) so a panel can force light under a dark ancestor — used by the Theme
+   modes comparison view. Every value is a precomputed flat hex (no color-mix()) so it
+   rasterizes identically in-browser and in screenshot/PDF/PPTX export. ---- */
+:root,[data-theme="light"]{
+  --bg-canvas:#FFFFFF;
+  --bg-surface:#F5F5F7;
+  --bg-elevated:#FFFFFF;
+  --border-default:#E8E8EF;
+  --text-primary:#111111;
+  --text-secondary:#6B6B76;
+  --text-tertiary:var(--gray-400);
+  --action-primary:#6200EE;
+  --action-primary-hover:#2E005F;
+  --accent:#FF6F61;
+  --focus-ring:0 0 0 3px rgba(98,0,238,0.30);
+
+  --text-heading:var(--action-primary-hover);
+  --text-brand:var(--action-primary);
+  --border-selected:var(--action-primary);
+  --accent-warm:var(--coral-500);
+  --scrim:rgba(29,0,60,0.44);
+
+  --status-positive:#0E9F6E;
+  --status-positive-soft:#E4F7EF;
+  --status-negative:#D92D20;
+  --status-negative-soft:#FDE7E5;
+  --status-warning:#B7791F;
+  --status-warning-soft:#FEF3E0;
+
+  /* Tinted/mixed surfaces — precomputed from the tokens above, flat hex, no color-mix() */
+  --brand-primary-press:#270051;
+  --brand-soft:#ECE0FD;
+  --brand-soft-hover:#E0CCFC;
+  --brand-tint:#F4EDFE;
+  --accent-warm-soft:#FFE8E6;
+  --accent-warm-hover:#E85446;
+  --surface-selected:#E9DBFD;
+  --surface-disabled:#EEEEF3;
+  --surface-muted:#EFEFF3;
+  --surface-progress-current:#A973F6;
+  --text-disabled:#AEAEB4;
+  --border-strong:#B2B2B8;
+  --border-brand-soft:#B997EF;
+
+  /* Risk badge — fixed light/text pairing seen only in dark today; light keeps the
+     graduated status-color badges, this pair exists so the token has a sane value. */
+  --badge-risk-bg:var(--brand-soft);
+  --badge-risk-text:var(--text-brand);
+
+  /* The one sanctioned gradient (see below) is a no-op in light: flat brand fill. */
+  --surface-brand-hero:var(--action-primary);
+}
+
+/* ---- THEME TOKENS — dark. Retuned from a real IEB+ dark screenshot: a neutral
+   carbon canvas with slate-blue card surfaces, light hairline borders instead of
+   shadows, and violet reserved for action/focus/selection — not the app background. */
+[data-theme="dark"]{
+  --bg-canvas:#1C1C1E;
+  --bg-surface:#232325;
+  --bg-elevated:#34424D;
+  --border-default:#D7DCE3;
+  --text-primary:#F5F5F7;
+  --text-secondary:#D0D4DA;
+  --text-tertiary:#AEB4BC;
+  --action-primary:#6A00F4;
+  --action-primary-hover:#5A00CF;
+  --accent:#C37BFF;
+  --focus-ring:0 0 0 3px rgba(106,0,244,0.45);
+
+  /* Titles and nav-active/selection borders use the lavender accent (safe on the
+     canvas/surface backgrounds they sit on); text-brand is a lighter tint reserved for
+     icons/labels that render on top of card surfaces (bg-elevated, brand-soft) where
+     the raw accent would fail 4.5:1 body-text contrast. */
+  --text-heading:var(--accent);
+  --text-brand:var(--purple-200);
+  --border-selected:var(--accent);
+  /* Own ramp, decoupled from --accent (which is violet here, not coral) — a
+     lightened coral tuned for contrast on the carbon canvas. */
+  --accent-warm:#FF7A6B;
+  --scrim:rgba(0,0,0,0.6);
+
+  --status-positive:#34D399;
+  --status-positive-soft:#123726;
+  --status-negative:#F87171;
+  --status-negative-soft:#3B1620;
+  --status-warning:#FBBF24;
+  --status-warning-soft:#3D2B0C;
+
+  /* Tinted/mixed surfaces — precomputed dark equivalents, flat hex, no color-mix() */
+  --brand-primary-press:#4D00B0;
+  --brand-soft:#3A3A61;
+  --brand-soft-hover:#3F356E;
+  --brand-tint:#211A2D;
+  --accent-warm-soft:#472420;
+  --accent-warm-hover:#E66E60;
+  --surface-selected:#484A66;
+  --surface-disabled:#86898E;
+  --surface-muted:#74767A;
+  --surface-progress-current:#521EA9;
+  --text-disabled:#7F8185;
+  --border-strong:#E1E5EA;
+  --border-brand-soft:#B18FE9;
+
+  /* Risk badge — fixed pairing from the real app: a single lavender chip for every
+     risk level (the level itself is carried by the label/icon, not the color). */
+  --badge-risk-bg:#C7A6F2;
+  --badge-risk-text:#24113D;
+
+  /* The one sanctioned gradient in the whole system, scoped to the patrimonio hero
+     card only — nothing else in dark (or light) uses a gradient. */
+  --surface-brand-hero:linear-gradient(135deg,#4D00D9,#7000FF);
+}
+
+:root{
+  /* ---- Semantic aliases (use these in components) — plain var() references, so
+     they always resolve to whichever theme is active at the element using them. ---- */
+  --brand-primary:var(--action-primary);
+  --brand-primary-hover:var(--action-primary-hover);
+  --brand-strong:var(--action-primary-hover);
+  --bg-app:var(--bg-canvas);
+  --surface-card:var(--bg-elevated);
+  --surface-secondary:var(--bg-surface);
+  --surface-brand:var(--action-primary);
+  --surface-brand-deep:var(--action-primary-hover);
+
+  --text-inverse:#FFFFFF;
+  --text-on-brand-muted:rgba(255,255,255,0.78);
+
+  --border-subtle:var(--border-default);
+}

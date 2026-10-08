@@ -1,0 +1,32 @@
+:root{
+  --font-core:"Nunito","Nunito Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-display:"Nunito","Nunito Sans",system-ui,sans-serif;
+  --font-body:"Nunito Sans","Nunito",system-ui,sans-serif;
+  --font-numeric:"Nunito","Nunito Sans",system-ui,sans-serif;
+
+  --weight-regular:400;
+  --weight-medium:500;
+  --weight-semibold:600;
+  --weight-bold:700;
+  --weight-extrabold:800;
+
+  /* Mobile-first scale (px) */
+  --text-display:30px;      --leading-display:36px;
+  --text-h1:24px;           --leading-h1:30px;
+  --text-h2:20px;           --leading-h2:26px;
+  --text-h3:17px;           --leading-h3:23px;
+  --text-body:15px;         --leading-body:22px;
+  --text-body-lg:16px;      --leading-body-lg:24px;
+  --text-label:13px;        --leading-label:18px;
+  --text-caption:12px;      --leading-caption:16px;
+
+  /* Financial figures */
+  --text-amount-xl:34px;    --leading-amount-xl:40px;
+  --text-amount-lg:24px;    --leading-amount-lg:30px;
+  --text-amount-sm:16px;    --leading-amount-sm:22px;
+
+  --tracking-tight:-0.02em;
+  --tracking-normal:0;
+  --tracking-wide:0.04em;
+  --tracking-caps:0.08em;
+}
