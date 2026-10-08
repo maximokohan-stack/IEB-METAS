@@ -3,7 +3,15 @@
 <head>
 <meta charset="utf-8">
 <title>IEB+ Metas</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#6200EE">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="IEB+ Metas">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons-app/apple-touch-icon.png">
+<script>if ("serviceWorker" in navigator) { addEventListener("load", function () { navigator.serviceWorker.register("../sw.js").catch(function () {}); }); }</script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -33,14 +41,25 @@ body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 input,textarea{-webkit-user-select:text;user-select:text}
 .ieb-sheet,.ieb-sheet *{overscroll-behavior:contain}
 .mt-sm{margin-top:12px}
+/* Zonas táctiles de al menos 44 px */
+.ieb-tag,.ieb-btn.is-sm,.ieb-iconbtn,.ieb-navitem,.ieb-choice{min-height:44px}
+.ieb-choice{align-items:center}
+.ieb-note a{display:inline-block;padding:13px 4px;margin:-13px -4px}
+.ieb-tag{justify-content:center}
+/* En un celular real el prototipo ocupa toda la pantalla, sin marco ni panel de pruebas */
+@media (max-width:520px){
+  .app-shell{padding:0 !important;gap:0 !important;min-height:100dvh !important}
+  .phone-frame{width:100vw !important;height:100dvh !important;border-radius:0 !important;box-shadow:none !important;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
+  .fake-status,.test-panel{display:none !important}
+}
 </style>
 </helmet>
 
-<div style="min-height:100vh;display:flex;align-items:flex-start;justify-content:center;gap:28px;padding:28px 24px 40px;flex-wrap:wrap">
+<div class="app-shell" style="min-height:100vh;display:flex;align-items:flex-start;justify-content:center;gap:28px;padding:28px 24px 40px;flex-wrap:wrap">
 
-<div style="position:relative;width:390px;height:844px;background:var(--bg-canvas);border-radius:40px;box-shadow:0 24px 70px rgba(29,0,60,0.24);overflow:hidden;display:flex;flex-direction:column;flex:none">
+<div class="phone-frame" style="position:relative;width:390px;height:844px;background:var(--bg-canvas);border-radius:40px;box-shadow:0 24px 70px rgba(29,0,60,0.24);overflow:hidden;display:flex;flex-direction:column;flex:none">
 
-<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 22px 2px;font-family:'Nunito',system-ui,sans-serif;font-size:13px;font-weight:800;color:var(--text-primary)"><span>9:41</span><span style="opacity:.85">▮▮▮</span></div>
+<div class="fake-status" style="display:flex;align-items:center;justify-content:space-between;padding:10px 22px 2px;font-family:'Nunito',system-ui,sans-serif;font-size:13px;font-weight:800;color:var(--text-primary)"><span>9:41</span><span style="opacity:.85">▮▮▮</span></div>
 
 <x-import component-from-global-scope="IEBDesignSystem_afd037.TopBar" title="{{ barTitle }}" eyebrow="{{ barEyebrow }}" onBack="{{ barBack }}" hint-size="100%,56px"></x-import>
 
@@ -52,7 +71,24 @@ input,textarea{-webkit-user-select:text;user-select:text}
 
 <sc-if value="{{ isEntrada }}" hint-placeholder-val="{{ true }}">
 <div data-screen-label="Entrada a Metas" style="display:flex;flex-direction:column;gap:18px">
-<p style="margin:-4px 0 0;font:400 15px/22px 'Nunito Sans',system-ui,sans-serif;color:var(--text-secondary);text-wrap:pretty">Empezá por lo que querés lograr. Te ayudamos a elegir cómo invertir para llegar.</p>
+<p style="margin:-4px 0 0;font:400 15px/22px 'Nunito Sans',system-ui,sans-serif;color:var(--text-secondary);text-wrap:pretty">Empezá por lo que querés lograr.</p>
+
+<sc-if value="{{ hayParaHoy }}" hint-placeholder-val="{{ true }}">
+<div class="ieb-card is-soft" style="display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;align-items:center;gap:10px">
+<span class="ieb-row-media"><x-import component-from-global-scope="IEBDesignSystem_afd037.Icon" name="{{ phIcon }}" size="{{ veinte }}" hint-size="20px,20px"></x-import></span>
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--text-brand)">{{ phEtiqueta }}</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:2px">
+<span style="font:800 17px/22px 'Nunito',system-ui,sans-serif;color:var(--text-heading)">{{ phTitulo }}</span>
+<span class="ieb-help">{{ phSub }}</span>
+</div>
+<div style="display:flex;gap:8px">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Button" size="md" onClick="{{ phAction }}" hint-size="auto,44px">{{ phCta }}</x-import>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Button" variant="ghost" size="md" onClick="{{ phSecAction }}" hint-size="auto,44px">Ver meta</x-import>
+</div>
+</div>
+</sc-if>
 
 <sc-if value="{{ tieneMetas }}" hint-placeholder-val="{{ true }}">
 <div style="display:flex;flex-direction:column;gap:10px">
@@ -124,7 +160,7 @@ input,textarea{-webkit-user-select:text;user-select:text}
 
 <sc-if value="{{ isPerfil }}" hint-placeholder-val="{{ false }}">
 <div data-screen-label="2 Entender - tu perfil" style="display:flex;flex-direction:column;gap:16px">
-<p style="margin:-4px 0 0;font:400 15px/22px 'Nunito Sans',system-ui,sans-serif;color:var(--text-secondary);text-wrap:pretty">Tres preguntas para entender desde dónde arrancás y cuánto movimiento te resulta tolerable.</p>
+<p style="margin:-4px 0 0;font:400 15px/22px 'Nunito Sans',system-ui,sans-serif;color:var(--text-secondary);text-wrap:pretty">Tres preguntas rápidas.</p>
 
 <div style="display:flex;flex-direction:column;gap:10px">
 <span style="font-family:'Nunito',system-ui,sans-serif;font-size:13px;font-weight:700;color:var(--text-primary)">¿Invertiste alguna vez?</span>
@@ -181,7 +217,7 @@ input,textarea{-webkit-user-select:text;user-select:text}
 
 <div style="display:flex;flex-direction:column;gap:4px;margin-top:4px">
 <span style="font-family:'Nunito',system-ui,sans-serif;font-size:18px;font-weight:800;letter-spacing:-.02em;color:var(--text-heading)">Elegí cómo invertir</span>
-<span style="font:400 14px/21px 'Nunito Sans',system-ui,sans-serif;color:var(--text-secondary);text-wrap:pretty">Armamos tres opciones según el nivel de riesgo. Te sugerimos una, pero decidís vos.</span>
+<span style="font:400 14px/21px 'Nunito Sans',system-ui,sans-serif;color:var(--text-secondary);text-wrap:pretty">Te sugerimos una, pero decidís vos.</span>
 </div>
 
 <x-import component-from-global-scope="IEBDesignSystem_afd037.RecommendationCard" instrument="{{ recNombre }}" riskLabel="{{ recRiesgo }}" reason="{{ recReason }}" stats="{{ recStats }}" primaryLabel="Elegir esta opción" onPrimary="{{ elegirRec }}" onWhy="{{ abrirPorque }}" hint-size="100%,280px"></x-import>
@@ -344,6 +380,29 @@ input,textarea{-webkit-user-select:text;user-select:text}
 <x-import component-from-global-scope="IEBDesignSystem_afd037.ListRow" icon="compass" title="Cuando revisemos tu estrategia" subtitle="Te contamos qué cambió y si conviene hacer algo" chevron="{{ falso }}" hint-size="100%,60px"></x-import>
 <x-import component-from-global-scope="IEBDesignSystem_afd037.ListRow" icon="triangle-alert" title="Si te desviás del plan" subtitle="Con opciones para acomodarlo" chevron="{{ falso }}" hint-size="100%,60px"></x-import>
 </div>
+
+<sc-if value="{{ notifPendiente }}" hint-placeholder-val="{{ true }}">
+<div class="ieb-card is-soft" style="display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;align-items:center;gap:10px">
+<span class="ieb-row-media"><x-import component-from-global-scope="IEBDesignSystem_afd037.Icon" name="bell-ring" size="{{ veinte }}" hint-size="20px,20px"></x-import></span>
+<span style="font:800 17px/22px 'Nunito',system-ui,sans-serif;color:var(--text-heading)">Activá los avisos</span>
+</div>
+<span class="ieb-help">Solo te avisamos tres cosas: tu próximo aporte, si te desviás del plan y si cambia el mercado. Nada de promociones.</span>
+<div style="display:flex;gap:8px">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Button" size="md" onClick="{{ pedirNotif }}" hint-size="auto,44px">Activar avisos</x-import>
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Button" variant="ghost" size="md" onClick="{{ ahoraNoNotif }}" hint-size="auto,44px">Ahora no</x-import>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ notifOk }}" hint-placeholder-val="{{ false }}">
+<div class="ieb-card" style="display:flex;flex-direction:column;gap:4px">
+<span style="font-family:'Nunito',system-ui,sans-serif;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--text-brand)">Qué avisos querés</span>
+<sc-for list="{{ notifTipos }}" as="nt" hint-placeholder-count="3">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Switch" label="{{ nt.label }}" checked="{{ nt.on }}" onChange="{{ nt.toggle }}" help="{{ nt.help }}" hint-size="100%,60px"></x-import>
+</sc-for>
+</div>
+</sc-if>
 </div>
 </sc-if>
 
@@ -492,6 +551,34 @@ input,textarea{-webkit-user-select:text;user-select:text}
 
 <x-import component-from-global-scope="IEBDesignSystem_afd037.BottomNav" active="metas" onSelect="{{ noop }}" hint-size="100%,64px"></x-import>
 
+<sc-if value="{{ hayDialogo }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;z-index:60;background:var(--scrim);display:flex;align-items:center;justify-content:center;padding:0 32px">
+<div role="alertdialog" style="width:100%;background:var(--bg-elevated);border-radius:20px;overflow:hidden;box-shadow:var(--shadow-sheet);text-align:center">
+<div style="padding:22px 18px 16px;display:flex;flex-direction:column;gap:8px;align-items:center">
+<span class="ieb-row-media" style="width:52px;height:52px;border-radius:16px"><x-import component-from-global-scope="IEBDesignSystem_afd037.Icon" name="{{ dlgIcon }}" size="{{ veintiocho }}" hint-size="28px,28px"></x-import></span>
+<span style="font:800 17px/22px 'Nunito',system-ui,sans-serif;color:var(--text-primary)">{{ dlgTitulo }}</span>
+<span style="font:400 13px/19px 'Nunito Sans',system-ui,sans-serif;color:var(--text-secondary);text-wrap:pretty">{{ dlgTexto }}</span>
+</div>
+<div style="display:flex;border-top:1px solid var(--border-subtle)">
+<button type="button" onClick="{{ dlgNo }}" style="flex:1;min-height:52px;padding:0 8px;border:none;background:transparent;font:700 15px 'Nunito',system-ui,sans-serif;color:var(--text-secondary);cursor:pointer">{{ dlgNoLabel }}</button>
+<button type="button" onClick="{{ dlgSi }}" style="flex:1;min-height:52px;padding:0 8px;border:none;border-left:1px solid var(--border-subtle);background:transparent;font:800 15px 'Nunito',system-ui,sans-serif;color:var(--text-brand);cursor:pointer">{{ dlgSiLabel }}</button>
+</div>
+<div style="padding:6px 12px 8px;border-top:1px solid var(--border-subtle);font:400 10px 'Nunito Sans',system-ui,sans-serif;color:var(--text-tertiary)">Simulación del permiso del sistema</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ pushVisible }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:10px;left:10px;right:10px;z-index:70;background:var(--bg-elevated);border:1px solid var(--border-subtle);border-radius:18px;box-shadow:var(--shadow-sheet);padding:12px 14px;display:flex;gap:10px;align-items:flex-start">
+<span style="width:32px;height:32px;border-radius:9px;background:var(--brand-primary);color:var(--text-inverse);display:flex;align-items:center;justify-content:center;flex:none"><x-import component-from-global-scope="IEBDesignSystem_afd037.Icon" name="target" size="{{ dieciocho }}" hint-size="18px,18px"></x-import></span>
+<div style="flex:1;display:flex;flex-direction:column;gap:2px">
+<div style="display:flex;justify-content:space-between;gap:8px"><span style="font:700 12px 'Nunito',system-ui,sans-serif;color:var(--text-secondary)">IEB+ Metas</span><span class="ieb-help">ahora</span></div>
+<span style="font:800 14px/19px 'Nunito',system-ui,sans-serif;color:var(--text-primary)">Tu aporte se debita mañana</span>
+<span style="font:400 13px/18px 'Nunito Sans',system-ui,sans-serif;color:var(--text-secondary)">{{ pushTexto }}</span>
+</div>
+</div>
+</sc-if>
+
 <x-import component-from-global-scope="IEBDesignSystem_afd037.Sheet" open="{{ sheetMonto }}" title="Cuánto necesitás" onClose="{{ cerrarSheet }}" footer="{{ footerListo }}" hint-size="100%,340px">
 <x-import component-from-global-scope="IEBDesignSystem_afd037.AmountInput" label="Objetivo" value="{{ montoRaw }}" presets="{{ montoPresets }}" onChange="{{ setMonto }}" onPreset="{{ setMontoPreset }}" help="Es una referencia. La podés mover cuando quieras." hint-size="100%,180px"></x-import>
 <div class="mt-sm"><x-import component-from-global-scope="IEBDesignSystem_afd037.Note" icon="calculator" hint-size="100%,60px">{{ consecuenciaAporte }}</x-import></div>
@@ -598,6 +685,12 @@ input,textarea{-webkit-user-select:text;user-select:text}
 <div style="display:flex;flex-direction:column;gap:12px">
 <p style="margin:0;font:400 15px/22px 'Nunito Sans',system-ui,sans-serif;color:var(--text-primary);text-wrap:pretty">{{ terminoTexto }}</p>
 <x-import component-from-global-scope="IEBDesignSystem_afd037.Note" tone="neutral" icon="{{ terminoIcon }}" hint-size="100%,60px">{{ terminoNota }}</x-import>
+<sc-if value="{{ houseBoton }}" hint-placeholder-val="{{ false }}">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Button" block="{{ verdadero }}" variant="secondary" icon="map-pin" onClick="{{ pedirUbic }}" hint-size="100%,52px">Avisarme si hay uno cerca</x-import>
+</sc-if>
+<sc-if value="{{ houseOk }}" hint-placeholder-val="{{ false }}">
+<x-import component-from-global-scope="IEBDesignSystem_afd037.Note" tone="positive" icon="map-pin" hint-size="100%,60px">Listo: te avisamos cuando haya un House IEB+ cerca.</x-import>
+</sc-if>
 </div>
 </x-import>
 
@@ -625,7 +718,7 @@ input,textarea{-webkit-user-select:text;user-select:text}
 </div>
 
 <sc-if value="{{ verPanel }}" hint-placeholder-val="{{ true }}">
-<div style="width:320px;flex:none;display:flex;flex-direction:column;gap:14px;background:#FFFFFF;border:1px solid rgba(29,0,60,.1);border-radius:16px;padding:18px;box-shadow:0 10px 30px rgba(29,0,60,.08)">
+<div class="test-panel" style="width:320px;flex:none;display:flex;flex-direction:column;gap:14px;background:#FFFFFF;border:1px solid rgba(29,0,60,.1);border-radius:16px;padding:18px;box-shadow:0 10px 30px rgba(29,0,60,.08)">
 <div style="display:flex;flex-direction:column;gap:4px">
 <span style="font-family:'Nunito',system-ui,sans-serif;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#6200EE">Panel de prueba</span>
 <span style="font:400 13px/19px 'Nunito Sans',system-ui,sans-serif;color:#6B6B76;text-wrap:pretty">Fuera de la app. Saltá a cada etapa del recorrido, disparás estados y ves los eventos que se miden.</span>
@@ -813,6 +906,7 @@ class Component extends DCLogic {
     ajuste: null,
     aporteExtra: "20000",
     ultimoAporte: 0,
+    dialogo: null, notif: "pendiente", notifTipos: { aporte: true, desvio: true, mercado: true }, ubicOk: false, pushVisible: false,
     eventos: [{ name: "metas_abierta", detail: "entrada" }]
   };
 
@@ -863,7 +957,7 @@ class Component extends DCLogic {
         el.style.webkitMaskImage = val;
       } else if (val === undefined) {
         cache[name] = null;
-        fetch("https://cdn.jsdelivr.net/npm/lucide-static@1.52.0/icons/" + name + ".svg")
+        fetch("./icons/" + name + ".svg")
           .then(r => r.text())
           .then(txt => {
             cache[name] = 'url("data:image/svg+xml,' + encodeURIComponent(txt) + '")';
@@ -1052,7 +1146,7 @@ class Component extends DCLogic {
       crear: { label: "Continuar", icon: "arrow-right", action: () => this.go("perfil", "etapa_entender") },
       perfil: { label: "Ver mi plan", icon: "arrow-right", disabled: !perfilListo, action: () => this.go("plan", "perfil_validado", st.perfilRiesgo) },
       simulacion: { label: "Seguir con mi meta", icon: "arrow-right", action: () => this.go(st.draft ? "crear" : "entrada", "simulacion_cerrada") },
-      invertir: { label: "Invertir y crear la meta", icon: "check", disabled: !st.consent || excede, action: () => this.crearMeta(op) },
+      invertir: { label: "Invertir y crear la meta", icon: "check", disabled: !st.consent || excede, action: () => { this.setState({ dialogo: "bio" }); this.track("biometria_solicitada"); } },
       listo: { label: "Ver mi meta", icon: "arrow-right", action: () => this.go("detalle", "detalle_abierto") },
       detalle: { label: "Sumar aporte", icon: "plus", action: () => this.setState({ sheet: "sumar" }), sec: { label: "Adaptar", action: () => this.go("ajustar", "adaptacion_explorada") } },
       ajustar: { label: "Confirmar el cambio", icon: "check", disabled: !st.ajuste, action: () => this.aplicarAjuste(ajustesLista) }
@@ -1066,6 +1160,50 @@ class Component extends DCLogic {
     const Btn = window.IEBDesignSystem_afd037.Button;
     const term = TERMINOS[st.termino] || TERMINOS.fci;
     const ops = NIVELES.map(k => OPCIONES[k]);
+
+    const cerrarDialogo = () => this.setState({ dialogo: null });
+    const dialogos = {
+      notif: {
+        icon: "bell", titulo: "“IEB+” quiere enviarte notificaciones",
+        texto: "Te avisamos antes de cada aporte, si te desviás del plan y si cambia el mercado. Nada de promociones.",
+        no: "No permitir", si: "Permitir",
+        accionNo: () => { this.setState({ dialogo: null, notif: "no" }); this.track("notificaciones_rechazadas"); },
+        accion: () => {
+          this.setState({ dialogo: null, notif: "si", pushVisible: true });
+          this.track("notificaciones_activadas");
+          setTimeout(() => this.setState({ pushVisible: false }), 5500);
+        }
+      },
+      bio: {
+        icon: "fingerprint", titulo: "Confirmá con tu huella o Face ID",
+        texto: d.inicial > 0 ? "Vas a autorizar la orden por " + money(d.inicial) + " en " + op.nombre + "." : "Vas a activar tu plan de aportes en " + op.nombre + ".",
+        no: "Cancelar", si: "Confirmar",
+        accionNo: cerrarDialogo,
+        accion: () => { this.setState({ dialogo: null }); this.track("biometria_confirmada"); setTimeout(() => this.crearMeta(op), 250); }
+      },
+      ubic: {
+        icon: "map-pin", titulo: "“IEB+” quiere usar tu ubicación",
+        texto: "Solo para avisarte si hay un House IEB+ cerca. No la guardamos.",
+        no: "No permitir", si: "Permitir mientras uso la app",
+        accionNo: cerrarDialogo,
+        accion: () => { this.setState({ dialogo: null, ubicOk: true }); this.track("ubicacion_permitida"); }
+      }
+    };
+    const dlg = dialogos[st.dialogo] || null;
+
+    const metaFuera = st.metas.find(m => m.ritmo === "fuera_de_ritmo");
+    const metaProx = st.metas.find(m => m.modo === "mensual") || st.metas[0];
+    const abrirMeta = m => () => { this.setState({ metaId: m.id }); this.go("detalle", "detalle_abierto", m.label); };
+    const paraHoy = metaFuera ? {
+      icon: "triangle-alert", etiqueta: "Para revisar", titulo: metaFuera.label + " se desvió del plan",
+      sub: "Salteaste " + (metaFuera.salteados || 2) + " aportes. Te mostramos cómo acomodarla.",
+      cta: "Acomodar", action: () => { this.setState({ metaId: metaFuera.id }); this.go("ajustar", "aviso_abierto", "desvio"); }, sec: abrirMeta(metaFuera)
+    } : (metaProx ? {
+      icon: "calendar-check", etiqueta: "Para hoy",
+      titulo: metaProx.modo === "mensual" ? "Tu próximo aporte es el " + metaProx.dia + " de octubre" : "Todo en ritmo",
+      sub: money(metaProx.aporte) + " para " + metaProx.label + (metaProx.modo === "mensual" ? ". Se debita solo." : ". Te avisamos cuando cobres."),
+      cta: "Sumar aporte", action: () => { this.setState({ metaId: metaProx.id, sheet: "sumar" }); this.track("aporte_rapido", metaProx.label); }, sec: abrirMeta(metaProx)
+    } : null);
 
     const evo = (() => {
       const gm = metaOp.g / 12;
@@ -1096,7 +1234,7 @@ class Component extends DCLogic {
     );
 
     return {
-      verPanel: this.props.verPanel !== false,
+      verPanel: this.props.verPanel === true || /[?&]panel=1/.test(location.search),
       scrollRef: this.scrollRef,
       verdadero: true, falso: false, noop: () => {},
       cuatro: 4, dieciseis: 16, dieciocho: 18, veinte: 20, veintiocho: 28,
@@ -1122,6 +1260,26 @@ class Component extends DCLogic {
       totalInvertidoText: money(st.metas.reduce((a, m) => a + m.ahorrado, 0)),
       totalAporteText: money(st.metas.reduce((a, m) => a + (m.modo === "mensual" ? m.aporte : 0), 0)),
       totalMetasText: st.metas.length + (st.metas.length === 1 ? " meta activa" : " metas activas"),
+      hayParaHoy: !!paraHoy,
+      phIcon: paraHoy ? paraHoy.icon : "calendar-check", phEtiqueta: paraHoy ? paraHoy.etiqueta : "",
+      phTitulo: paraHoy ? paraHoy.titulo : "", phSub: paraHoy ? paraHoy.sub : "", phCta: paraHoy ? paraHoy.cta : "",
+      phAction: paraHoy ? paraHoy.action : () => {}, phSecAction: paraHoy ? paraHoy.sec : () => {},
+      hayDialogo: !!dlg,
+      dlgIcon: dlg ? dlg.icon : "bell", dlgTitulo: dlg ? dlg.titulo : "", dlgTexto: dlg ? dlg.texto : "",
+      dlgNoLabel: dlg ? dlg.no : "", dlgSiLabel: dlg ? dlg.si : "",
+      dlgNo: dlg ? dlg.accionNo : () => {}, dlgSi: dlg ? dlg.accion : () => {},
+      notifPendiente: st.notif === "pendiente", notifOk: st.notif === "si",
+      pedirNotif: () => this.setState({ dialogo: "notif" }),
+      ahoraNoNotif: () => { this.setState({ notif: "no" }); this.track("notificaciones_pospuestas"); },
+      notifTipos: [
+        { k: "aporte", label: "Próximo aporte", help: "Un día antes, por si querés saltearlo." },
+        { k: "desvio", label: "Si te desviás del plan", help: "Con opciones para acomodarlo." },
+        { k: "mercado", label: "Cambios del mercado", help: "Solo cuando haya algo para hacer." }
+      ].map(t => ({ label: t.label, help: t.help, on: st.notifTipos[t.k], toggle: () => this.setState(x => ({ notifTipos: Object.assign({}, x.notifTipos, { [t.k]: !x.notifTipos[t.k] }) })) })),
+      pushVisible: st.pushVisible,
+      pushTexto: money(meta.aporte) + " para " + meta.label + ". Podés saltearlo desde la meta.",
+      houseBoton: st.termino === "house" && !st.ubicOk, houseOk: st.termino === "house" && st.ubicOk,
+      pedirUbic: () => this.setState({ dialogo: "ubic" }),
       metasResumen: st.metas.map(m => {
         const p = Math.min(100, Math.round(m.ahorrado / m.objetivo * 100));
         const off = m.ritmo === "fuera_de_ritmo";
