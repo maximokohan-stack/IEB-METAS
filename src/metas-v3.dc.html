@@ -25,6 +25,13 @@ body{margin:0;background:#EDEBF2;font-family:"Nunito Sans","Nunito",system-ui,sa
 a{color:var(--action-primary);text-decoration:none}
 a:hover{color:var(--action-primary-hover)}
 button.ieb-card{font:inherit;color:inherit;width:100%;text-align:left;cursor:pointer;display:block}
+/* Comportamiento de app móvil: sin barras de escritorio, sin swipe lateral ni zoom, sin selección de texto */
+*{scrollbar-width:none;-ms-overflow-style:none;-webkit-tap-highlight-color:transparent;touch-action:pan-y}
+*::-webkit-scrollbar{display:none;width:0;height:0}
+html,body{overscroll-behavior:none}
+body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+input,textarea{-webkit-user-select:text;user-select:text}
+.ieb-sheet,.ieb-sheet *{overscroll-behavior:contain}
 .mt-sm{margin-top:12px}
 </style>
 </helmet>
@@ -41,7 +48,7 @@ button.ieb-card{font:inherit;color:inherit;width:100%;text-align:left;cursor:poi
 <div style="padding:0 20px 14px"><x-import component-from-global-scope="IEBDesignSystem_afd037.Stepper" step="{{ flowStep }}" total="{{ cuatro }}" hint-size="100%,16px"></x-import></div>
 </sc-if>
 
-<div ref="{{ scrollRef }}" style="flex:1;overflow-y:auto;padding:0 20px 24px;display:flex;flex-direction:column;gap:16px">
+<div ref="{{ scrollRef }}" style="flex:1;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:0 20px 24px;display:flex;flex-direction:column;gap:16px">
 
 <sc-if value="{{ isEntrada }}" hint-placeholder-val="{{ true }}">
 <div data-screen-label="Entrada a Metas" style="display:flex;flex-direction:column;gap:18px">
